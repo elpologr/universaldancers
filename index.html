@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Universal Dancers MX - Plataforma de Danza Mundial</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* --- ESTILOS GENERALES --- */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0b0b0b;
+            color: #ffffff;
+        }
+
+        /* --- BANNER INTERACTIVO --- */
+        .banner-baile-contenedor {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            overflow: hidden;
+            border-bottom: 4px solid #ffffff;
+            cursor: pointer;
+        }
+
+        .video-fondo-baile {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+            z-index: 1;
+        }
+
+        .capa-contraste-banner {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 2;
+        }
+
+        .btn-audio-baile {
+            position: absolute;
+            bottom: 25px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.15);
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            padding: 10px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 11px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            z-index: 10;
+            backdrop-filter: blur(5px);
+            transition: all 0.3s ease;
+        }
+
+        .btn-audio-baile:hover {
+            background: #ffffff;
+            color: #0b0b0b;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+        }
+
+        /* --- SECCIÓN PRINCIPAL: IDENTIDAD --- */
+        .seccion-identidad {
+            max-width: 900px;
+            margin: 50px auto 30px auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        .seccion-identidad h1 {
+            margin: 0;
+            font-size: 46px;
+            font-weight: 900;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-family: 'Impact', 'Arial Black', sans-serif;
+        }
+
+        .seccion-identidad p {
+            margin-top: 15px;
+            font-size: 16px;
+            line-height: 1.6;
+            color: #a0a0a0;
+            font-weight: 300;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* --- SECCIÓN DE REDES SOCIALES --- */
+        .contenedor-redes {
+            max-width: 800px;
+            margin: 30px auto;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            padding: 0 20px;
+        }
+
+        .btn-red-social {
+            background: #161616;
+            color: #ffffff;
+            text-decoration: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            border: 1px solid #262626;
+            transition: all 0.3s ease;
+        }
+
+        .btn-red-social:hover {
+            background: #ffffff;
+            color: #0b0b0b;
+            border-color: #ffffff;
+            transform: translateY(-2px);
+        }
+
+        /* --- SISTEMA DE 3 FILTROS EN CASCADA COMPLETA --- */
+        .seccion-filtros-global {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 25px;
+            background: #121212;
+            border: 1px solid #1a1a1a;
+            border-radius: 12px;
+        }
+
+        .grid-selectores-filtros {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .bloque-selector {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .bloque-selector label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #888888;
+            font-weight: bold;
+            padding-left: 2px;
+        }
+
+        .selector-desplegable-filtro {
+            background: #181818;
+            color: #ffffff;
+            border: 1px solid #282828;
+            padding: 12px 15px;
+            font-size: 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            outline: none;
+            font-weight: 600;
+            box-sizing: border-box;
+            transition: all 0.2s;
+        }
+
+        .selector-desplegable-filtro:focus, .selector-desplegable-filtro:hover {
+            border-color: #cd8433;
+            background: #1c1c1c;
+        }
+
+        .selector-desplegable-filtro option {
+            background: #121212;
+            color: #ffffff;
+            padding: 10px;
+        }
+
+        /* --- SECCIÓN DE PESTAÑAS PRINCIPALES --- */
+        .contenedor-filtros {
+            max-width: 1000px;
+            margin: 40px auto 30px auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            padding: 0 20px;
+        }
+
+        .btn-filtro-grande {
+            background: #121212;
+            color: #8c8c8c;
+            border: 2px solid #222222;
+            padding: 25px;
+            font-size: 20px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Impact', sans-serif;
+        }
+
+        .btn-filtro-grande:hover {
+            border-color: #666666;
+            color: #ffffff;
+        }
+
+        .btn-filtro-grande.activo {
+            background: #ffffff;
+            color: #0b0b0b;
+            border-color: #ffffff;
+            box-shadow: 0 4px 20px rgba(255, 255, 255, 0.15);
+        }
+
+        /* --- CONTENEDORES DE CONTENIDO --- */
+        .bloque-contenido {
+            display: none;
+            max-width: 1200px;
+            margin: 0 auto 80px auto;
+            padding: 0 20px;
+        }
+
+        .bloque-contenido.activo {
+            display: block;
+        }
+
+        /* --- GALERÍA DE BAILARINES --- */
+        .grid-bailarines {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 20px;
+        }
+
+        .tarjeta-bailarin {
+            background: #121212;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid #1a1a1a;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .tarjeta-bailarin:hover {
+            transform: translateY(-5px);
+            border-color: #444444;
+            box-shadow: 0 5px 15px rgba(255, 255, 255, 0.05);
+        }
+
+        .contenedor-foto {
+            width: 100%;
+            height: 240px;
+            background: #202020;
+            position: relative;
+        }
+
+        .foto-bailarin {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .contenedor-etiquetas-rank {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            z-index: 5;
+        }
+
+        .etiqueta-ranking {
+            background: rgba(0, 0, 0, 0.85);
+            color: #ffffff;
+            padding: 4px 8px;
+            font-size: 10px;
+            font-weight: bold;
+            border-radius: 4px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            text-transform: uppercase;
+        }
+        
+        .etiqueta-ranking.local {
+            border-color: #cd8433;
+            color: #cd8433;
+        }
+
+        .info-tarjeta-bailarin {
+            padding: 15px;
+            text-align: center;
+        }
+
+        .info-tarjeta-bailarin h3 {
+            margin: 0;
+            font-size: 16px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .info-tarjeta-bailarin p {
+            margin: 5px 0 0 0;
+            font-size: 12px;
+            color: #888888;
+        }
+
+        .badge-ubicacion-tarjeta {
+            display: inline-block;
+            margin-top: 8px;
+            font-size: 11px;
+            background: #1c1c1c;
+            padding: 4px 10px;
+            border-radius: 12px;
+            color: #cccccc;
+            border: 1px solid #252525;
+        }
+
+        /* --- FEED DE CONTENIDO --- */
+        .contenedor-feed {
+            max-width: 650px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        .tarjeta-publicacion {
+            background: #121212;
+            border-radius: 12px;
+            border: 1px solid #1a1a1a;
+            overflow: hidden;
+        }
+
+        .cabecera-publicacion {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px;
+            border-bottom: 1px solid #1a1a1a;
+        }
+
+        .perfil-creador {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+        }
+
+        .perfil-creador:hover .nombre-creador {
+            text-decoration: underline;
+            color: #ffffff;
+        }
+
+        .avatar-creador {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            background: #333333;
+            border: 1px solid #444444;
+        }
+
+        .nombre-creador {
+            font-size: 14px;
+            font-weight: 700;
+            color: #e0e0e0;
+        }
+
+        .fecha-publicacion {
+            font-size: 12px;
+            color: #666666;
+        }
+
+        .cuerpo-publicacion {
+            width: 100%;
+            background: #000000;
+        }
+
+        .multimedia-publicacion {
+            width: 100%;
+            display: block;
+            max-height: 500px;
+            object-fit: cover;
+        }
+
+        .pie-publicacion {
+            padding: 15px;
+        }
+
+        .pie-publicacion p {
+            margin: 0;
+            font-size: 14px;
+            line-height: 1.5;
+            color: #ccc;
+        }
+
+        /* --- VISOR MODAL --- */
+        .modal-visor {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .contenido-modal {
+            background: #111111;
+            max-width: 850px;
+            width: 100%;
+            height: 85vh;
+            border-radius: 16px;
+            border: 1px solid #252525;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.7);
+            display: grid;
+            grid-template-columns: 280px 1fr;
+        }
+
+        .btn-cerrar-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(0, 0, 0, 0.6);
+            color: #ffffff;
+            border: none;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            font-size: 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 110;
+            border: 1px solid #333;
+        }
+
+        .btn-cerrar-modal:hover {
+            background: #ffffff;
+            color: #0b0b0b;
+        }
+
+        .modal-lateral-izquierda {
+            width: 100%;
+            height: 100%;
+            background: #181818;
+            border-right: 1px solid #222;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+
+        .contenedor-foto-modal {
+            width: 100%;
+            height: 320px;
+            background: #000;
+            flex-shrink: 0;
+        }
+
+        .foto-modal {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .mini-info-personal {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 15px;
+        }
+
+        .mini-info-personal h2 {
+            margin: 0 0 5px 0;
+            font-family: 'Impact', sans-serif;
+            font-size: 24px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .modal-estilo-baile {
+            color: #cd8433;
+            font-size: 13px;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+        }
+
+        .redes-bailarin-modal {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-top: 15px;
+        }
+
+        .link-red-modal {
+            background: #1a1a1a;
+            color: #ccc;
+            text-decoration: none;
+            font-size: 13px;
+            padding: 8px 12px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border: 1px solid #262626;
+            transition: all 0.2s;
+        }
+
+        .link-red-modal i { font-size: 16px; }
+
+        .modal-detalles-derecha {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            background: #141414;
+            overflow: hidden;
+        }
+
+        .menu-sub-pestanas {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            background: #1a1a1a;
+            border-bottom: 1px solid #252525;
+            flex-shrink: 0;
+        }
+
+        .btn-sub-pestana {
+            background: none;
+            border: none;
+            color: #777;
+            padding: 15px;
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+        }
+
+        .btn-sub-pestana.activo {
+            color: #ffffff;
+            border-bottom-color: #cd8433;
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .area-contenido-blog {
+            padding: 30px;
+            overflow-y: auto;
+            flex-grow: 1;
+            box-sizing: border-box;
+        }
+
+        .segmento-historia h3 { font-family: 'Impact', sans-serif; font-size: 20px; color: #fff; margin: 0 0 10px 0; }
+        .segmento-historia p { font-size: 14px; line-height: 1.6; color: #b0b0b0; margin: 0 0 15px 0; }
+        .img-segmento-blog { width: 100%; max-height: 280px; object-fit: cover; border-radius: 8px; border: 1px solid #333; }
+
+        .grid-videos-blog { display: flex; flex-direction: column; gap: 20px; }
+        .tarjeta-video-blog { display: grid; grid-template-columns: 180px 1fr; background: #1a1a1a; border-radius: 8px; overflow: hidden; border: 1px solid #252525; }
+        .miniatura-video-blog { width: 100%; height: 110px; object-fit: cover; }
+        .info-video-blog { padding: 15px; display: flex; flex-direction: column; justify-content: space-between; }
+        .info-video-blog h4 { margin: 0 0 5px 0; font-size: 15px; color: #fff; }
+        
+        .btn-redireccion-yt {
+            align-self: flex-start;
+            background: #ff0000;
+            color: #fff;
+            text-decoration: none;
+            font-size: 11px;
+            font-weight: bold;
+            padding: 6px 12px;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+
+        .tarjeta-proyecto-blog { background: #1a1a1a; border: 1px solid #252525; border-radius: 8px; padding: 20px; }
+
+        /* --- PIE DE PÁGINA --- */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            background-color: #000000;
+            color: #505050;
+            font-size: 13px;
+            margin-top: 100px;
+        }
+
+        /* RESPONSIVO */
+        @media (max-width: 950px) { .grid-bailarines { grid-template-columns: repeat(3, 1fr); } }
+        @media (max-width: 750px) {
+            .grid-bailarines { grid-template-columns: repeat(2, 1fr); }
+            .grid-selectores-filtros { grid-template-columns: 1fr; gap: 15px; }
+            .contenido-modal { grid-template-columns: 1fr; height: 90vh; overflow-y: auto; }
+            .modal-lateral-izquierda { height: auto; border-right: none; border-bottom: 1px solid #222; }
+            .area-contenido-blog { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="banner-baile-contenedor" onclick="abrirVideoOriginal(event)">
+        <video id="videoBaile" class="video-fondo-baile" autoplay muted loop playsinline>
+            <source src="videos/banner-baile.mp4" type="video/mp4">
+        </video>
+        <div class="capa-contraste-banner"></div>
+        <button id="btnAudio" class="btn-audio-baile">🔇 Sin Sonido</button>
+    </div>
+
+    <section class="seccion-identidad">
+        <h1>Universal Dancers MX</h1>
+        <p>Espacio dedicado a proyectar el talento, la pasión y el movimiento de la comunidad de bailarines en México y el Mundo.</p>
+    </section>
+
+    <div class="contenedor-redes">
+        <a href="https://youtube.com" target="_blank" class="btn-red-social">▶️ YouTube</a>
+        <a href="https://facebook.com" target="_blank" class="btn-red-social">👤 Facebook</a>
+        <a href="https://www.instagram.com/universaldancersmx_/" target="_blank" class="btn-red-social">📸 Instagram</a>
+        <a href="https://tiktok.com" target="_blank" class="btn-red-social">🎵 TikTok</a>
+    </div>
+
+    <div class="seccion-filtros-global">
+        <div class="grid-selectores-filtros">
+            
+            <div class="bloque-selector">
+                <label for="selectorPais">Elegir País</label>
+                <select id="selectorPais" class="selector-desplegable-filtro" onchange="cambiarPaisFiltro(this.value)">
+                    </select>
+            </div>
+
+            <div class="bloque-selector">
+                <label for="selectorEstado">Elegir Estado</label>
+                <select id="selectorEstado" class="selector-desplegable-filtro" onchange="cambiarEstadoFiltro(this.value)">
+                    </select>
+            </div>
+
+            <div class="bloque-selector">
+                <label for="selectorCiudad">Elegir Ciudad</label>
+                <select id="selectorCiudad" class="selector-desplegable-filtro" onchange="cambiarCiudadFiltro(this.value)">
+                    </select>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="contenedor-filtros">
+        <button class="btn-filtro-grande activo" onclick="cambiarPestana('bailarines')">Bailarines</button>
+        <button class="btn-filtro-grande" onclick="cambiarPestana('contenido')">Contenido Publicado</button>
+    </div>
+
+    <section id="bloqueBailarines" class="bloque-contenido activo">
+        <div id="gridBailarines" class="grid-bailarines"></div>
+    </section>
+
+    <section id="bloqueContenido" class="bloque-contenido">
+        <div id="contenedorFeed" class="contenedor-feed"></div>
+    </section>
+
+    <div id="visorModal" class="modal-visor" onclick="cerrarModalExterno(event)">
+        <div class="contenido-modal">
+            <button class="btn-cerrar-modal" onclick="cerrarVisor()">✕</button>
+            <div class="modal-lateral-izquierda">
+                <div class="contenedor-foto-modal">
+                    <img id="modalFoto" src="" alt="Artista" class="foto-modal">
+                </div>
+                <div class="mini-info-personal">
+                    <div>
+                        <h2 id="modalNombre">Nombre</h2>
+                        <div id="modalEstilo" class="modal-estilo-baile">Estilo</div>
+                        <p style="margin:0; font-size:13px; color:#aaa;">Ubicación: <span id="modalUbicacion" style="color:#fff; font-weight:bold;">--</span></p>
+                        <p style="margin:5px 0 0 0; font-size:13px; color:#aaa;">Ranks: <span id="modalRanks" style="color:#cd8433; font-weight:bold;">--</span></p>
+                        <p style="margin:5px 0 0 0; font-size:13px; color:#aaa;">Edad: <span id="modalEdad" style="color:#fff; font-weight:bold;">--</span></p>
+                        <p style="margin:5px 0 0 0; font-size:13px; color:#aaa;">Género: <span id="modalGenero" style="color:#fff; font-weight:bold;">--</span></p>
+                    </div>
+                    <div id="modalRedes" class="redes-bailarin-modal"></div>
+                </div>
+            </div>
+            <div class="modal-detalles-derecha">
+                <div class="menu-sub-pestanas">
+                    <button id="btnBlogHistoria" class="btn-sub-pestana activo" onclick="cambiarSubPestana('historia')">Historia</button>
+                    <button id="btnBlogVideos" class="btn-sub-pestana" onclick="cambiarSubPestana('videos')">Videos</button>
+                    <button id="btnBlogProyectos" class="btn-sub-pestana" onclick="cambiarSubPestana('proyectos')">Proyectos</button>
+                </div>
+                <div id="areaContenidoBlog" class="area-contenido-blog"></div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Universal Dancers MX &bull; Diseñado con orgullo por Yesos Polo Digital</p>
+    </footer>
+
+    <script>
+        /* --- BASE DE DATOS LOCAL (Aquí es donde alimentas tus perfiles) --- */
+        const bailarines = [
+            { id: "b1", nombre: "Hadrian_Ruiz", estilo: "Popping / Animation", edad: 25, genero: "Masculino", foto: "imagenes/dropstep1.jpg", pais: "México", estado: "Ciudad de Mexico", ciudad: "CDMX", rankingMundial: 2, rankingLocal: 1, redes: [{ nombre: "YouTube", usuario: "@poppingdropstephrc5973", url: "https://www.youtube.com/channel/UCMguHbCKnICZexfW5kYJa7w" }], historia: [{ titulo: "La Creación de Universal Dancers MX", texto: "Este proyecto nació de la visión de Zismo...", imagen: "imagenes/banner.jpg" }], videos: [], proyectos: [{ nombre: "Universal Dancers MX", descripcion: "Desarrollo..." }] },
+            { id: "b2", nombre: "Seven Neo 777", estilo: "Popping", edad: 22, genero: "Femenino", foto: "imagenes/seven-neo-perfil1.jpg", pais: "México", estado: "Ciudad de Mexico", ciudad: "CDMX", rankingMundial: 5, rankingLocal: 2, redes: [{ nombre: "YouTube", usuario: "@poppingdropstephrc5973", url: "https://www.youtube.com/channel/UCMguHbCKnICZexfW5kYJa7w" }], historia: [], videos: [], proyectos: [] },
+            { id: "b7", nombre: "Elio Enai", estilo: "Popping", edad: 20, genero: "Masculino", foto: "img/bailarin7.jpg", pais: "México", estado: "Michoacan", ciudad: "Nuevo Urecho", rankingMundial: 8, rankingLocal: 4, redes: [{ nombre: "YouTube", usuario: "@poppingdropstephrc5973", url: "https://www.youtube.com/channel/UCMguHbCKnICZexfW5kYJa7w" }], historia: [], videos: [], proyectos: [] },
+            { id: "b3", nombre: "Polo Dubstep", estilo: "Popping / Animation", edad: 27, genero: "Masculino", foto: "imagenes/polo-dubstep-logo1.jpg", pais: "Rusia", estado: "Moscú", ciudad: "Moscú", rankingMundial: 1, rankingLocal: 1, redes: [{ nombre: "YouTube", usuario: "@poppingdropstephrc5973", url: "https://www.youtube.com/channel/UCMguHbCKnICZexfW5kYJa7w" }], historia: [], videos: [], proyectos: [] },
+            { id: "b4", nombre: "Daiko", estilo: "Contemporary Dance", edad: 25, genero: "Femenino", foto: "img/bailarin4.jpg", pais: "Francia", estado: "Isla de Francia", ciudad: "París", rankingMundial: 3, rankingLocal: 1, redes: [{ nombre: "YouTube", usuario: "@poppingdropstephrc5973", url: "https://www.youtube.com/channel/UCMguHbCKnICZexfW5kYJa7w" }], historia: [], videos: [], proyectos: [] },
+            { id: "b5", nombre: "Logan.starglow", estilo: "Locking & Whacking", edad: 23, genero: "Masculino", foto: "img/bailarin5.jpg", pais: "México", estado: "Jalisco", ciudad: "Guadalajara", rankingMundial: 6, rankingLocal: 3, redes: [{ nombre: "YouTube", usuario: "@poppingdropstephrc5973", url: "https://www.youtube.com/channel/UCMguHbCKnICZexfW5kYJa7w" }], historia: [], videos: [], proyectos: [] },
+            { id: "b6", nombre: "Loqque", estilo: "Elctro Dance / Break Dance / HipHop", edad: 26, genero: "Masculino", foto: "img/bailarin6.jpg", pais: "Mexico", estado: "Michoacan", ciudad: "Morelia", rankingMundial: 4, rankingLocal: 2, redes: [{ nombre: "YouTube", usuario: "@poppingdropstephrc5973", url: "https://www.youtube.com/channel/UCMguHbCKnICZexfW5kYJa7w" }], historia: [], videos: [], proyectos: [] },
+            { id: "b7", nombre: "Jackson", estilo: "Break Dance", edad: 26, genero: "Masculino", foto: "img/bailarin6.jpg", pais: "Mexico", estado: "Michoacan", ciudad: "Morelia", rankingMundial: 4, rankingLocal: 2, redes: [{ nombre: "YouTube", usuario: "@poppingdropstephrc5973", url: "https://www.youtube.com/channel/UCMguHbCKnICZexfW5kYJa7w" }], historia: [], videos: [], proyectos: [] },
+            { id: "b8", nombre: "Joshua Cho", estilo: "Electro Dance", edad: 28, genero: "Masculino", foto: "img/bailarin6.jpg", pais: "Mexico", estado: "Michoacan", ciudad: "Morelia", rankingMundial: 4, rankingLocal: 2, redes: [{ nombre: "YouTube", usuario: "@poppingdropstephrc5973", url: "https://www.youtube.com/channel/UCMguHbCKnICZexfW5kYJa7w" }], historia: [], videos: [], proyectos: [] },
+            { id: "b9", nombre: "Egor Sokolov", estilo: "Dancehall", edad: 21, genero: "Femenino", foto: "img/bailarin6.jpg", pais: "Mexico", estado: "Michoacan", ciudad: "Morelia", rankingMundial: 4, rankingLocal: 2, redes: [{ nombre: "YouTube", usuario: "@poppingdropstephrc5973", url: "https://www.youtube.com/channel/UCMguHbCKnICZexfW5kYJa7w" }], historia: [], videos: [], proyectos: [] },
+            { id: "b9", nombre: "Gravity Balmain Jacobs", estilo: "Vogue", edad: 21, genero: "he/they", foto: "img/bailarin6.jpg", pais: "EE.UU", estado: "California", ciudad: "Los Angeles", rankingMundial: 4, rankingLocal: 2, redes: [{ nombre: "YouTube", usuario: "@poppingdropstephrc5973", url: "https://www.youtube.com/channel/UCMguHbCKnICZexfW5kYJa7w" }], historia: [], videos: [], proyectos: [] },
+            { id: "b9", nombre: "Alexis Dales", estilo: "Dancehall", edad: 21, genero: "Femenino", foto: "img/bailarin6.jpg", pais: "Mexico", estado: "Michoacan", ciudad: "Morelia", rankingMundial: 4, rankingLocal: 2, redes: [{ nombre: "YouTube", usuario: "@poppingdropstephrc5973", url: "https://www.youtube.com/channel/UCMguHbCKnICZexfW5kYJa7w" }], historia: [], videos: [], proyectos: [] },
+            { id: "b9", nombre: "Jorge Art", estilo: "Electro Dance / Break Dance", edad: 21, genero: "Femenino", foto: "img/bailarin6.jpg", pais: "Mexico", estado: "Michoacan", ciudad: "Morelia", rankingMundial: 4, rankingLocal: 2, redes: [], historia: [], videos: [], proyectos: [] },
+            { id: "b9", nombre: "Dulce", estilo: "Dancehall", edad: 21, genero: "Femenino", foto: "img/bailarin6.jpg", pais: "Mexico", estado: "Michoacan", ciudad: "Morelia", rankingMundial: 4, rankingLocal: 2, redes: [{ nombre: "YouTube", usuario: "@poppingdropstephrc5973", url: "https://www.youtube.com/channel/" }], historia: [], videos: [], proyectos: [] },
+            { id: "b9", nombre: "Dulce", estilo: "Dancehall", edad: 21, genero: "Femenino", foto: "img/bailarin6.jpg", pais: "Mexico", estado: "Michoacan", ciudad: "Morelia", rankingMundial: 4, rankingLocal: 2, redes: [{ nombre: "YouTube", usuario: "@poppingdropstephrc5973", url: "https://www.youtube.com/channel/" }], historia: [], videos: [], proyectos: [] },
+            { id: "b9", nombre: "Dulce", estilo: "Dancehall", edad: 21, genero: "Femenino", foto: "img/bailarin6.jpg", pais: "Mexico", estado: "Michoacan", ciudad: "Morelia", rankingMundial: 4, rankingLocal: 2, redes: [{ nombre: "YouTube", usuario: "@poppingdropstephrc5973", url: "https://www.youtube.com/channel/UCMguHbCKnICZexfW5kYJa7w" }], historia: [], videos: [], proyectos: [] },
+            { id: "b9", nombre: "Dulce", estilo: "Dancehall", edad: 21, genero: "Femenino", foto: "img/bailarin6.jpg", pais: "Mexico", estado: "Michoacan", ciudad: "Morelia", rankingMundial: 4, rankingLocal: 2, redes: [{ nombre: "YouTube", usuario: "@poppingdropstephrc5973", url: "https://www.youtube.com/channel/UCMguHbCKnICZexfW5kYJa7w" }], historia: [], videos: [], proyectos: [] },
+            { id: "b9", nombre: "Dulce", estilo: "Dancehall", edad: 21, genero: "Femenino", foto: "img/bailarin6.jpg", pais: "Mexico", estado: "Michoacan", ciudad: "Morelia", rankingMundial: 4, rankingLocal: 2, redes: [{ nombre: "YouTube", usuario: "@poppingdropstephrc5973", url: "https://www.youtube.com/channel/UCMguHbCKnICZexfW5kYJa7w" }], historia: [], videos: [], proyectos: [] },
+            { id: "b9", nombre: "Dulce", estilo: "Dancehall", edad: 21, genero: "Femenino", foto: "img/bailarin6.jpg", pais: "Mexico", estado: "Michoacan", ciudad: "Morelia", rankingMundial: 4, rankingLocal: 2, redes: [{ nombre: "YouTube", usuario: "@poppingdropstephrc5973", url: "https://www.youtube.com/channel/UCMguHbCKnICZexfW5kYJa7w" }], historia: [], videos: [], proyectos: [] },
+            { id: "b9", nombre: "Dulce", estilo: "Dancehall", edad: 21, genero: "Femenino", foto: "img/bailarin6.jpg", pais: "Mexico", estado: "Michoacan", ciudad: "Morelia", rankingMundial: 4, rankingLocal: 2, redes: [{ nombre: "YouTube", usuario: "@poppingdropstephrc5973", url: "https://www.youtube.com/channel/UCMguHbCKnICZexfW5kYJa7w" }], historia: [], videos: [], proyectos: [] },
+            { id: "b9", nombre: "Dulce", estilo: "Dancehall", edad: 21, genero: "Femenino", foto: "img/bailarin6.jpg", pais: "Mexico", estado: "Michoacan", ciudad: "Morelia", rankingMundial: 4, rankingLocal: 2, redes: [{ nombre: "YouTube", usuario: "@poppingdropstephrc5973", url: "https://www.youtube.com/channel/UCMguHbCKnICZexfW5kYJa7w" }], historia: [], videos: [], proyectos: [] },
+            { id: "b9", nombre: "Dulce", estilo: "Dancehall", edad: 21, genero: "Femenino", foto: "img/bailarin6.jpg", pais: "Mexico", estado: "Michoacan", ciudad: "Morelia", rankingMundial: 4, rankingLocal: 2, redes: [{ nombre: "YouTube", usuario: "@poppingdropstephrc5973", url: "https://www.youtube.com/channel/UCMguHbCKnICZexfW5kYJa7w" }], historia: [], videos: [], proyectos: [] },
+            { id: "b9", nombre: "Dulce", estilo: "Dancehall", edad: 21, genero: "Femenino", foto: "img/bailarin6.jpg", pais: "Mexico", estado: "Michoacan", ciudad: "Morelia", rankingMundial: 4, rankingLocal: 2, redes: [{ nombre: "YouTube", usuario: "@poppingdropstephrc5973", url: "https://www.youtube.com/channel/UCMguHbCKnICZexfW5kYJa7w" }], historia: [], videos: [], proyectos: [] },
+            { id: "b9", nombre: "Dulce", estilo: "Dancehall", edad: 21, genero: "Femenino", foto: "img/bailarin6.jpg", pais: "Mexico", estado: "Michoacan", ciudad: "Morelia", rankingMundial: 4, rankingLocal: 2, redes: [{ nombre: "YouTube", usuario: "@poppingdropstephrc5973", url: "https://www.youtube.com/channel/UCMguHbCKnICZexfW5kYJa7w" }], historia: [], videos: [], proyectos: [] },
+        ];
+
+        const publicaciones = [
+            { idPost: "p1", idBailarin: "b1", fecha: "2026-05-10", multimedia: "imagenes/dropstep1.jpg", descripcion: "Entrenamiento duro de Power Moves esta mañana." }
+        ];
+
+        let idArtistaSeleccionadoActivo = null;
+        let paisFiltroActual = "todos";
+        let estadoFiltroActual = "todos";
+        let ciudadFiltroActual = "todas";
+
+        document.addEventListener("DOMContentLoaded", () => {
+            inicializarSelectoresInteligentes();
+            renderizarBailarines();
+            renderizarFeed();
+        });
+
+        /* --- DETECTA PAÍSES ACTIVOS Y CONSTRUYE EL SELECTOR INICIAL --- */
+        function inicializarSelectoresInteligentes() {
+            // Extrae los países únicos de la lista de bailarines reales
+            let paisesConContenido = bailarines.map(b => b.pais).filter(p => p);
+            paisesConContenido = [...new Set(paisesConContenido)].sort();
+
+            const selectPais = document.getElementById("selectorPais");
+            selectPais.innerHTML = `<option value="todos">🌍 Todos los Países (${paisesConContenido.length})</option>`;
+            
+            paisesConContenido.forEach(pais => {
+                selectPais.innerHTML += `<option value="${pais}">${pais}</option>`;
+            });
+
+            // Arrancamos los hijos limpios
+            actualizarDesplegableEstados();
+            actualizarDesplegableCiudades();
+        }
+
+        /* --- LÓGICA DE FILTRADO Y RENDERIZADO --- */
+        function renderizarBailarines() {
+            const grid = document.getElementById("gridBailarines");
+            grid.innerHTML = "";
+
+            let listaFiltrada = [...bailarines];
+            
+            if (paisFiltroActual !== "todos") {
+                listaFiltrada = listaFiltrada.filter(b => b.pais.toLowerCase() === paisFiltroActual.toLowerCase());
+            }
+            if (estadoFiltroActual !== "todos") {
+                listaFiltrada = listaFiltrada.filter(b => b.estado === estadoFiltroActual);
+            }
+            if (ciudadFiltroActual !== "todas") {
+                listaFiltrada = listaFiltrada.filter(b => b.ciudad === ciudadFiltroActual);
+            }
+
+            // Ordenamiento por rangos
+            if (paisFiltroActual === "todos") {
+                listaFiltrada.sort((a, b) => a.rankingMundial - b.rankingMundial);
+            } else {
+                listaFiltrada.sort((a, b) => a.rankingLocal - b.rankingLocal);
+            }
+
+            listaFiltrada.forEach(b => {
+                const tarjeta = document.createElement("div");
+                tarjeta.className = "tarjeta-bailarin";
+                tarjeta.onclick = () => abrirVisorBailarin(b.id);
+                
+                tarjeta.innerHTML = `
+                    <div class="contenedor-foto">
+                        <div class="contenedor-etiquetas-rank">
+                            <span class="etiqueta-ranking">🌍 Global: #${b.rankingMundial}</span>
+                            <span class="etiqueta-ranking local">📍 Local: #${b.rankingLocal}</span>
+                        </div>
+                        <img src="${b.foto}" alt="${b.nombre}" class="foto-bailarin" onerror="this.src='https://via.placeholder.com/240x240/222/fff?text=${b.nombre}'">
+                    </div>
+                    <div class="info-tarjeta-bailarin">
+                        <h3>${b.nombre}</h3>
+                        <p>${b.estilo}</p>
+                        <span class="badge-ubicacion-tarjeta">📍 ${b.ciudad}, ${b.estado || b.pais}</span>
+                    </div>
+                `;
+                grid.appendChild(tarjeta);
+            });
+        }
+
+        /* --- MANEJADORES DE EVENTOS DE SELECTOR --- */
+        function cambiarPaisFiltro(pais) {
+            paisFiltroActual = pais;
+            estadoFiltroActual = "todos"; 
+            ciudadFiltroActual = "todas"; 
+
+            actualizarDesplegableEstados();
+            actualizarDesplegableCiudades();
+            renderizarBailarines(); 
+        }
+
+        function cambiarEstadoFiltro(estado) {
+            estadoFiltroActual = estado;
+            ciudadFiltroActual = "todas"; 
+
+            actualizarDesplegableCiudades();
+            renderizarBailarines(); 
+        }
+
+        function cambiarCiudadFiltro(ciudad) {
+            ciudadFiltroActual = ciudad;
+            renderizarBailarines(); 
+        }
+
+        /* --- CONSTRUCCIÓN DINÁMICA DE BOTONES BASADOS EN CONTENIDO --- */
+        function actualizarDesplegableEstados() {
+            const selectEstado = document.getElementById("selectorEstado");
+            selectEstado.innerHTML = `<option value="todos">🌍 Todos los Estados</option>`;
+
+            if (paisFiltroActual !== "todos") {
+                // Filtra bailarines del país seleccionado, toma sus estados, remueve duplicados y ordena
+                let estadosConContenido = bailarines
+                    .filter(b => b.pais.toLowerCase() === paisFiltroActual.toLowerCase() && b.estado)
+                    .map(b => b.estado);
+                
+                estadosConContenido = [...new Set(estadosConContenido)].sort();
+                
+                estadosConContenido.forEach(est => {
+                    selectEstado.innerHTML += `<option value="${est}">${est}</option>`;
+                });
+            }
+        }
+
+        function actualizarDesplegableCiudades() {
+            const selectCiudad = document.getElementById("selectorCiudad");
+            selectCiudad.innerHTML = `<option value="todas">📍 Todas las Ciudades</option>`;
+
+            if (paisFiltroActual === "todos") return;
+
+            // Filtra por país actual
+            let bailarinesFiltrados = bailarines.filter(b => b.pais.toLowerCase() === paisFiltroActual.toLowerCase());
+
+            // Si además hay un estado elegido, reduce el filtro a ese estado
+            if (estadoFiltroActual !== "todos") {
+                bailarinesFiltrados = bailarinesFiltrados.filter(b => b.estado === estadoFiltroActual);
+            }
+
+            // Extrae ciudades únicas
+            let ciudadesConContenido = bailarinesFiltrados.map(b => b.ciudad).filter(c => c);
+            ciudadesConContenido = [...new Set(ciudadesConContenido)].sort();
+
+            ciudadesConContenido.forEach(ciu => {
+                selectCiudad.innerHTML += `<option value="${ciu}">${ciu}</option>`;
+            });
+        }
+
+        /* --- RESTO DE FUNCIONES (FEED, VISOR MODAL, PESTAÑAS) --- */
+        function renderizarFeed() {
+            const feed = document.getElementById("contenedorFeed");
+            feed.innerHTML = "";
+            publicaciones.forEach(post => {
+                const artista = bailarines.find(b => b.id === post.idBailarin);
+                if (!artista) return;
+                const tarjetaPost = document.createElement("div");
+                tarjetaPost.className = "tarjeta-publicacion";
+                tarjetaPost.innerHTML = `
+                    <div class="cabecera-publicacion">
+                        <div class="perfil-creador" onclick="abrirVisorBailarin('${artista.id}')">
+                            <img src="${artista.foto}" class="avatar-creador" onerror="this.src='https://via.placeholder.com/40/444/fff?text=A'">
+                            <span class="nombre-creador">${artista.nombre}</span>
+                        </div>
+                        <span class="fecha-publicacion">10 de mayo de 2026</span>
+                    </div>
+                    <div class="cuerpo-publicacion"><img src="${post.multimedia}" class="multimedia-publicacion"></div>
+                    <div class="pie-publicacion"><p>${post.descripcion}</p></div>
+                `;
+                feed.appendChild(tarjetaPost);
+            });
+        }
+
+        function abrirVisorBailarin(idBailarin) {
+            const b = bailarines.find(item => item.id === idBailarin);
+            if (!b) return;
+            idArtistaSeleccionadoActivo = idBailarin;
+            document.getElementById("modalFoto").src = b.foto;
+            document.getElementById("modalNombre").innerText = b.nombre;
+            document.getElementById("modalEstilo").innerText = b.estilo;
+            document.getElementById("modalEdad").innerText = b.edad + " años";
+            document.getElementById("modalGenero").innerText = b.genero;
+            document.getElementById("modalUbicacion").innerText = `${b.ciudad}, ${b.estado || b.pais}`;
+            document.getElementById("modalRanks").innerText = `Global #${b.rankingMundial} / Local #${b.rankingLocal}`;
+            cambiarSubPestana('historia');
+            document.getElementById("visorModal").style.display = "flex";
+        }
+
+        function cambiarSubPestana(seccion) {
+            document.getElementById("btnBlogHistoria").classList.remove("activo");
+            document.getElementById("btnBlogVideos").classList.remove("activo");
+            document.getElementById("btnBlogProyectos").classList.remove("activo");
+            if (seccion === 'historia') document.getElementById("btnBlogHistoria").classList.add("activo");
+            if (seccion === 'videos') document.getElementById("btnBlogVideos").classList.add("activo");
+            if (seccion === 'proyectos') document.getElementById("btnBlogProyectos").classList.add("activo");
+
+            const areaContenido = document.getElementById("areaContenidoBlog");
+            const b = bailarines.find(item => item.id === idArtistaSeleccionadoActivo);
+            areaContenido.innerHTML = "";
+            if (!b) return;
+
+            if (seccion === 'historia') {
+                if(!b.historia || b.historia.length === 0) {
+                    areaContenido.innerHTML = `<p style="color:#666; font-style:italic;">Sin historia redactada.</p>`;
+                    return;
+                }
+                b.historia.forEach(seg => {
+                    areaContenido.innerHTML += `<div class="segmento-historia"><h3>${seg.titulo}</h3><p>${seg.texto}</p></div>`;
+                });
+            }
+            if (seccion === 'videos') { areaContenido.innerHTML = `<p style="color:#666; font-style:italic;">No hay videos destacados.</p>`; }
+            if (seccion === 'proyectos') {
+                b.proyectos.forEach(pro => {
+                    areaContenido.innerHTML += `<div class="tarjeta-proyecto-blog"><h3>${pro.nombre}</h3><p>${pro.descripcion}</p></div>`;
+                });
+            }
+        }
+
+        function cambiarPestana(tipo) {
+            const btnBailarines = document.querySelectorAll(".btn-filtro-grande")[0];
+            const btnContenido = document.querySelectorAll(".btn-filtro-grande")[1];
+            if (tipo === 'bailarines') {
+                btnBailarines.classList.add("activo"); btnContenido.classList.remove("activo");
+                document.getElementById("bloqueBailarines").classList.add("activo");
+                document.getElementById("bloqueContenido").classList.remove("activo");
+            } else {
+                btnBailarines.classList.remove("activo"); btnContenido.classList.add("activo");
+                document.getElementById("bloqueBailarines").classList.remove("activo");
+                document.getElementById("bloqueContenido").classList.add("activo");
+            }
+        }
+
+        function cerrarVisor() { document.getElementById("visorModal").style.display = "none"; }
+        function cerrarModalExterno(e) { if (e.target === document.getElementById("visorModal")) cerrarVisor(); }
+        function abrirVideoOriginal() { window.open('videos/banner-baile.mp4', '_blank'); }
+    </script>
+</body>
+</html>
