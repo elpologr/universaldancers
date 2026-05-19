@@ -102,7 +102,7 @@
             margin-right: auto;
         }
 
-        /* --- SECCIÓN DE REDES SOCIALES --- */
+        /* --- SECCIÓN DE REDES SOCIALES DE LA PLATAFORMA --- */
         .contenedor-redes {
             max-width: 800px;
             margin: 30px auto;
@@ -132,7 +132,7 @@
             transform: translateY(-2px);
         }
 
-        /* --- SISTEMA DE 3 FILTROS EN CASCADA COMPLETA --- */
+        /* --- SISTEMA DE FILTROS EN CASCADA INTELIGENTE --- */
         .seccion-filtros-global {
             max-width: 900px;
             margin: 40px auto;
@@ -183,12 +183,6 @@
             background: #1c1c1c;
         }
 
-        .selector-desplegable-filtro option {
-            background: #121212;
-            color: #ffffff;
-            padding: 10px;
-        }
-
         /* --- SECCIÓN DE PESTAÑAS PRINCIPALES --- */
         .contenedor-filtros {
             max-width: 1000px;
@@ -204,14 +198,14 @@
             color: #8c8c8c;
             border: 2px solid #222222;
             padding: 25px;
-            font-size: 20px;
-            font-weight: 800;
+            font-size: 15px;
+            font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
             border-radius: 12px;
             cursor: pointer;
             transition: all 0.3s ease;
-            font-family: 'Impact', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         .btn-filtro-grande:hover {
@@ -408,7 +402,7 @@
             color: #ccc;
         }
 
-        /* --- VISOR MODAL --- */
+        /* --- VISOR MODAL PREMIUM --- */
         .modal-visor {
             display: none;
             position: fixed;
@@ -423,6 +417,7 @@
             align-items: center;
             padding: 20px;
             box-sizing: border-box;
+            overflow: hidden;
         }
 
         .contenido-modal {
@@ -436,7 +431,7 @@
             overflow: hidden;
             box-shadow: 0 15px 40px rgba(0,0,0,0.7);
             display: grid;
-            grid-template-columns: 280px 1fr;
+            grid-template-columns: 290px 1fr;
         }
 
         .btn-cerrar-modal {
@@ -445,7 +440,7 @@
             right: 15px;
             background: rgba(0, 0, 0, 0.6);
             color: #ffffff;
-            border: none;
+            border: 1px solid #333;
             width: 35px;
             height: 35px;
             border-radius: 50%;
@@ -455,7 +450,6 @@
             align-items: center;
             justify-content: center;
             z-index: 110;
-            border: 1px solid #333;
         }
 
         .btn-cerrar-modal:hover {
@@ -466,7 +460,7 @@
         .modal-lateral-izquierda {
             width: 100%;
             height: 100%;
-            background: #181818;
+            background: #161616;
             border-right: 1px solid #222;
             display: flex;
             flex-direction: column;
@@ -475,7 +469,7 @@
 
         .contenedor-foto-modal {
             width: 100%;
-            height: 320px;
+            height: 300px;
             background: #000;
             flex-shrink: 0;
         }
@@ -488,15 +482,13 @@
 
         .mini-info-personal {
             padding: 20px;
-            flex-grow: 1;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
-            gap: 15px;
+            gap: 12px;
         }
 
         .mini-info-personal h2 {
-            margin: 0 0 5px 0;
+            margin: 0 0 2px 0;
             font-family: 'Impact', sans-serif;
             font-size: 24px;
             letter-spacing: 0.5px;
@@ -508,64 +500,74 @@
             font-size: 13px;
             font-weight: bold;
             text-transform: uppercase;
-            margin-bottom: 15px;
+            margin-bottom: 5px;
         }
 
         .redes-bailarin-modal {
             display: flex;
-            flex-direction: column;
             gap: 8px;
-            margin-top: 15px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+            padding: 0 20px 20px 20px;
         }
 
         .link-red-modal {
-            background: #1a1a1a;
-            color: #ccc;
+            color: #ffffff;
             text-decoration: none;
-            font-size: 13px;
-            padding: 8px 12px;
+            font-size: 14px;
+            width: 36px;
+            height: 36px;
             border-radius: 6px;
             display: flex;
             align-items: center;
-            gap: 10px;
-            border: 1px solid #262626;
-            transition: all 0.2s;
+            justify-content: center;
+            transition: all 0.2s ease;
+            border: 1px solid rgba(255, 255, 255, 0.05);
         }
-
-        .link-red-modal i { font-size: 16px; }
+        
+        .link-red-modal.youtube { background: #202020; }
+        .link-red-modal.youtube:hover { background: #ff0000; box-shadow: 0 0 10px rgba(255, 0, 0, 0.4); }
+        .link-red-modal.facebook { background: #202020; }
+        .link-red-modal.facebook:hover { background: #1877f2; box-shadow: 0 0 10px rgba(24, 119, 242, 0.4); }
+        .link-red-modal.instagram { background: #202020; }
+        .link-red-modal.instagram:hover { background: #e1306c; box-shadow: 0 0 10px rgba(225, 48, 108, 0.4); }
+        .link-red-modal.tiktok { background: #202020; }
+        .link-red-modal.tiktok:hover { background: #ffffff; color: #000; }
 
         .modal-detalles-derecha {
             display: flex;
             flex-direction: column;
             height: 100%;
-            background: #141414;
+            background: #111111;
             overflow: hidden;
         }
 
         .menu-sub-pestanas {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            background: #1a1a1a;
-            border-bottom: 1px solid #252525;
+            grid-template-columns: repeat(4, 1fr);
+            background: #181818;
+            border-bottom: 1px solid #222;
             flex-shrink: 0;
         }
 
         .btn-sub-pestana {
             background: none;
             border: none;
-            color: #777;
+            color: #666;
             padding: 15px;
             font-size: 13px;
             font-weight: 700;
             text-transform: uppercase;
             cursor: pointer;
             border-bottom: 3px solid transparent;
+            transition: all 0.2s;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         .btn-sub-pestana.activo {
             color: #ffffff;
             border-bottom-color: #cd8433;
-            background: rgba(255, 255, 255, 0.02);
+            background: rgba(255, 255, 255, 0.01);
         }
 
         .area-contenido-blog {
@@ -575,38 +577,69 @@
             box-sizing: border-box;
         }
 
-        .segmento-historia h3 { font-family: 'Impact', sans-serif; font-size: 20px; color: #fff; margin: 0 0 10px 0; }
+        .segmento-historia h3 { font-family: 'Segoe UI', sans-serif; font-size: 18px; font-weight: 700; color: #fff; margin: 0 0 10px 0; }
         .segmento-historia p { font-size: 14px; line-height: 1.6; color: #b0b0b0; margin: 0 0 15px 0; }
-        .img-segmento-blog { width: 100%; max-height: 280px; object-fit: cover; border-radius: 8px; border: 1px solid #333; }
-
-        .grid-videos-blog { display: flex; flex-direction: column; gap: 20px; }
-        .tarjeta-video-blog { display: grid; grid-template-columns: 180px 1fr; background: #1a1a1a; border-radius: 8px; overflow: hidden; border: 1px solid #252525; }
-        .miniatura-video-blog { width: 100%; height: 110px; object-fit: cover; }
-        .info-video-blog { padding: 15px; display: flex; flex-direction: column; justify-content: space-between; }
-        .info-video-blog h4 { margin: 0 0 5px 0; font-size: 15px; color: #fff; }
         
-        .btn-redireccion-yt {
-            align-self: flex-start;
-            background: #ff0000;
+        .bloque-redes-proyecto {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn-proyecto-red {
             color: #fff;
             text-decoration: none;
             font-size: 11px;
             font-weight: bold;
-            padding: 6px 12px;
+            padding: 8px 14px;
             border-radius: 4px;
             text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
         }
 
-        .tarjeta-proyecto-blog { background: #1a1a1a; border: 1px solid #252525; border-radius: 8px; padding: 20px; }
+        .tarjeta-proyecto-blog { background: #161616; border: 1px solid #222; border-radius: 8px; padding: 20px; }
+        .tarjeta-proyecto-blog h3 { margin: 0 0 10px 0; color: #cd8433; font-size: 18px; }
 
-        /* --- PIE DE PÁGINA --- */
-        footer {
-            text-align: center;
-            padding: 40px 20px;
-            background-color: #000000;
-            color: #505050;
-            font-size: 13px;
-            margin-top: 100px;
+        /* --- TARJETAS DE VIDEO --- */
+        .tarjeta-video-blog {
+            background: #161616;
+            border: 1px solid #222;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+            transition: border-color 0.2s;
+        }
+        .tarjeta-video-blog:hover { border-color: #444; }
+        .tarjeta-video-blog .video-descripcion {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #b0b0b0;
+            margin: 0 0 14px 0;
+        }
+        .tarjeta-video-blog .btn-ver-video {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #1e1e1e;
+            color: #fff;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 9px 16px;
+            border-radius: 6px;
+            border: 1px solid #333;
+            transition: all 0.2s;
+        }
+        .tarjeta-video-blog .btn-ver-video:hover {
+            background: #ff0000;
+            border-color: #ff0000;
+            box-shadow: 0 0 12px rgba(255,0,0,0.3);
         }
 
         /* RESPONSIVO */
@@ -639,30 +672,22 @@
         <a href="https://youtube.com" target="_blank" class="btn-red-social">▶️ YouTube</a>
         <a href="https://facebook.com" target="_blank" class="btn-red-social">👤 Facebook</a>
         <a href="https://www.instagram.com/universaldancersmx_/" target="_blank" class="btn-red-social">📸 Instagram</a>
-        <a href="https://tiktok.com" target="_blank" class="btn-red-social">🎵 TikTok</a>
     </div>
 
     <div class="seccion-filtros-global">
         <div class="grid-selectores-filtros">
-            
             <div class="bloque-selector">
                 <label for="selectorPais">Elegir País</label>
-                <select id="selectorPais" class="selector-desplegable-filtro" onchange="cambiarPaisFiltro(this.value)">
-                    </select>
+                <select id="selectorPais" class="selector-desplegable-filtro" onchange="cambiarPaisFiltro(this.value)"></select>
             </div>
-
             <div class="bloque-selector">
                 <label for="selectorEstado">Elegir Estado</label>
-                <select id="selectorEstado" class="selector-desplegable-filtro" onchange="cambiarEstadoFiltro(this.value)">
-                    </select>
+                <select id="selectorEstado" class="selector-desplegable-filtro" onchange="cambiarEstadoFiltro(this.value)"></select>
             </div>
-
             <div class="bloque-selector">
                 <label for="selectorCiudad">Elegir Ciudad</label>
-                <select id="selectorCiudad" class="selector-desplegable-filtro" onchange="cambiarCiudadFiltro(this.value)">
-                    </select>
+                <select id="selectorCiudad" class="selector-desplegable-filtro" onchange="cambiarCiudadFiltro(this.value)"></select>
             </div>
-
         </div>
     </div>
 
@@ -682,6 +707,7 @@
     <div id="visorModal" class="modal-visor" onclick="cerrarModalExterno(event)">
         <div class="contenido-modal">
             <button class="btn-cerrar-modal" onclick="cerrarVisor()">✕</button>
+            
             <div class="modal-lateral-izquierda">
                 <div class="contenedor-foto-modal">
                     <img id="modalFoto" src="" alt="Artista" class="foto-modal">
@@ -695,14 +721,16 @@
                         <p style="margin:5px 0 0 0; font-size:13px; color:#aaa;">Edad: <span id="modalEdad" style="color:#fff; font-weight:bold;">--</span></p>
                         <p style="margin:5px 0 0 0; font-size:13px; color:#aaa;">Género: <span id="modalGenero" style="color:#fff; font-weight:bold;">--</span></p>
                     </div>
-                    <div id="modalRedes" class="redes-bailarin-modal"></div>
                 </div>
+                <div id="modalRedes" class="redes-bailarin-modal"></div>
             </div>
+
             <div class="modal-detalles-derecha">
                 <div class="menu-sub-pestanas">
-                    <button id="btnBlogHistoria" class="btn-sub-pestana activo" onclick="cambiarSubPestana('historia')">Historia</button>
+                    <button id="btnBlogProyectos" class="btn-sub-pestana activo" onclick="cambiarSubPestana('proyectos')">Proyectos</button>
+                    <button id="btnBlogColaboraciones" class="btn-sub-pestana" onclick="cambiarSubPestana('colaboraciones')">Colaboraciones</button>
+                    <button id="btnBlogImagenes" class="btn-sub-pestana" onclick="cambiarSubPestana('imagenes')">Imágenes</button>
                     <button id="btnBlogVideos" class="btn-sub-pestana" onclick="cambiarSubPestana('videos')">Videos</button>
-                    <button id="btnBlogProyectos" class="btn-sub-pestana" onclick="cambiarSubPestana('proyectos')">Proyectos</button>
                 </div>
                 <div id="areaContenidoBlog" class="area-contenido-blog"></div>
             </div>
@@ -714,32 +742,50 @@
     </footer>
 
     <script>
-        /* --- BASE DE DATOS LOCAL (Aquí es donde alimentas tus perfiles) --- */
         const bailarines = [
-            { id: "b1", nombre: "Hadrian_Ruiz", estilo: "Popping / Animation", edad: 25, genero: "Masculino", foto: "imagenes/dropstep1.jpg", pais: "México", estado: "Ciudad de Mexico", ciudad: "CDMX", rankingMundial: 2, rankingLocal: 1, redes: [{ nombre: "YouTube", usuario: "@poppingdropstephrc5973", url: "https://www.youtube.com/channel/UCMguHbCKnICZexfW5kYJa7w" }], historia: [{ titulo: "La Creación de Universal Dancers MX", texto: "Este proyecto nació de la visión de Zismo...", imagen: "imagenes/banner.jpg" }], videos: [], proyectos: [{ nombre: "Universal Dancers MX", descripcion: "Desarrollo..." }] },
-            { id: "b2", nombre: "Seven Neo 777", estilo: "Popping", edad: 22, genero: "Femenino", foto: "imagenes/seven-neo-perfil1.jpg", pais: "México", estado: "Ciudad de Mexico", ciudad: "CDMX", rankingMundial: 5, rankingLocal: 2, redes: [{ nombre: "YouTube", usuario: "@poppingdropstephrc5973", url: "https://www.youtube.com/channel/UCMguHbCKnICZexfW5kYJa7w" }], historia: [], videos: [], proyectos: [] },
-            { id: "b7", nombre: "Elio Enai", estilo: "Popping", edad: 20, genero: "Masculino", foto: "img/bailarin7.jpg", pais: "México", estado: "Michoacan", ciudad: "Nuevo Urecho", rankingMundial: 8, rankingLocal: 4, redes: [{ nombre: "YouTube", usuario: "@poppingdropstephrc5973", url: "https://www.youtube.com/channel/UCMguHbCKnICZexfW5kYJa7w" }], historia: [], videos: [], proyectos: [] },
-            { id: "b3", nombre: "Polo Dubstep", estilo: "Popping / Animation", edad: 27, genero: "Masculino", foto: "imagenes/polo-dubstep-logo1.jpg", pais: "Rusia", estado: "Moscú", ciudad: "Moscú", rankingMundial: 1, rankingLocal: 1, redes: [{ nombre: "YouTube", usuario: "@poppingdropstephrc5973", url: "https://www.youtube.com/channel/UCMguHbCKnICZexfW5kYJa7w" }], historia: [], videos: [], proyectos: [] },
-            { id: "b4", nombre: "Daiko", estilo: "Contemporary Dance", edad: 25, genero: "Femenino", foto: "img/bailarin4.jpg", pais: "Francia", estado: "Isla de Francia", ciudad: "París", rankingMundial: 3, rankingLocal: 1, redes: [{ nombre: "YouTube", usuario: "@poppingdropstephrc5973", url: "https://www.youtube.com/channel/UCMguHbCKnICZexfW5kYJa7w" }], historia: [], videos: [], proyectos: [] },
-            { id: "b5", nombre: "Logan.starglow", estilo: "Locking & Whacking", edad: 23, genero: "Masculino", foto: "img/bailarin5.jpg", pais: "México", estado: "Jalisco", ciudad: "Guadalajara", rankingMundial: 6, rankingLocal: 3, redes: [{ nombre: "YouTube", usuario: "@poppingdropstephrc5973", url: "https://www.youtube.com/channel/UCMguHbCKnICZexfW5kYJa7w" }], historia: [], videos: [], proyectos: [] },
-            { id: "b6", nombre: "Loqque", estilo: "Elctro Dance / Break Dance / HipHop", edad: 26, genero: "Masculino", foto: "img/bailarin6.jpg", pais: "Mexico", estado: "Michoacan", ciudad: "Morelia", rankingMundial: 4, rankingLocal: 2, redes: [{ nombre: "YouTube", usuario: "@poppingdropstephrc5973", url: "https://www.youtube.com/channel/UCMguHbCKnICZexfW5kYJa7w" }], historia: [], videos: [], proyectos: [] },
-            { id: "b7", nombre: "Jackson", estilo: "Break Dance", edad: 26, genero: "Masculino", foto: "img/bailarin6.jpg", pais: "Mexico", estado: "Michoacan", ciudad: "Morelia", rankingMundial: 4, rankingLocal: 2, redes: [{ nombre: "YouTube", usuario: "@poppingdropstephrc5973", url: "https://www.youtube.com/channel/UCMguHbCKnICZexfW5kYJa7w" }], historia: [], videos: [], proyectos: [] },
-            { id: "b8", nombre: "Joshua Cho", estilo: "Electro Dance", edad: 28, genero: "Masculino", foto: "img/bailarin6.jpg", pais: "Mexico", estado: "Michoacan", ciudad: "Morelia", rankingMundial: 4, rankingLocal: 2, redes: [{ nombre: "YouTube", usuario: "@poppingdropstephrc5973", url: "https://www.youtube.com/channel/UCMguHbCKnICZexfW5kYJa7w" }], historia: [], videos: [], proyectos: [] },
-            { id: "b9", nombre: "Egor Sokolov", estilo: "Dancehall", edad: 21, genero: "Femenino", foto: "img/bailarin6.jpg", pais: "Mexico", estado: "Michoacan", ciudad: "Morelia", rankingMundial: 4, rankingLocal: 2, redes: [{ nombre: "YouTube", usuario: "@poppingdropstephrc5973", url: "https://www.youtube.com/channel/UCMguHbCKnICZexfW5kYJa7w" }], historia: [], videos: [], proyectos: [] },
-            { id: "b9", nombre: "Gravity Balmain Jacobs", estilo: "Vogue", edad: 21, genero: "he/they", foto: "img/bailarin6.jpg", pais: "EE.UU", estado: "California", ciudad: "Los Angeles", rankingMundial: 4, rankingLocal: 2, redes: [{ nombre: "YouTube", usuario: "@poppingdropstephrc5973", url: "https://www.youtube.com/channel/UCMguHbCKnICZexfW5kYJa7w" }], historia: [], videos: [], proyectos: [] },
-            { id: "b9", nombre: "Alexis Dales", estilo: "Dancehall", edad: 21, genero: "Femenino", foto: "img/bailarin6.jpg", pais: "Mexico", estado: "Michoacan", ciudad: "Morelia", rankingMundial: 4, rankingLocal: 2, redes: [{ nombre: "YouTube", usuario: "@poppingdropstephrc5973", url: "https://www.youtube.com/channel/UCMguHbCKnICZexfW5kYJa7w" }], historia: [], videos: [], proyectos: [] },
-            { id: "b9", nombre: "Jorge Art", estilo: "Electro Dance / Break Dance", edad: 21, genero: "Femenino", foto: "img/bailarin6.jpg", pais: "Mexico", estado: "Michoacan", ciudad: "Morelia", rankingMundial: 4, rankingLocal: 2, redes: [], historia: [], videos: [], proyectos: [] },
-            { id: "b9", nombre: "Dulce", estilo: "Dancehall", edad: 21, genero: "Femenino", foto: "img/bailarin6.jpg", pais: "Mexico", estado: "Michoacan", ciudad: "Morelia", rankingMundial: 4, rankingLocal: 2, redes: [{ nombre: "YouTube", usuario: "@poppingdropstephrc5973", url: "https://www.youtube.com/channel/" }], historia: [], videos: [], proyectos: [] },
-            { id: "b9", nombre: "Dulce", estilo: "Dancehall", edad: 21, genero: "Femenino", foto: "img/bailarin6.jpg", pais: "Mexico", estado: "Michoacan", ciudad: "Morelia", rankingMundial: 4, rankingLocal: 2, redes: [{ nombre: "YouTube", usuario: "@poppingdropstephrc5973", url: "https://www.youtube.com/channel/" }], historia: [], videos: [], proyectos: [] },
-            { id: "b9", nombre: "Dulce", estilo: "Dancehall", edad: 21, genero: "Femenino", foto: "img/bailarin6.jpg", pais: "Mexico", estado: "Michoacan", ciudad: "Morelia", rankingMundial: 4, rankingLocal: 2, redes: [{ nombre: "YouTube", usuario: "@poppingdropstephrc5973", url: "https://www.youtube.com/channel/UCMguHbCKnICZexfW5kYJa7w" }], historia: [], videos: [], proyectos: [] },
-            { id: "b9", nombre: "Dulce", estilo: "Dancehall", edad: 21, genero: "Femenino", foto: "img/bailarin6.jpg", pais: "Mexico", estado: "Michoacan", ciudad: "Morelia", rankingMundial: 4, rankingLocal: 2, redes: [{ nombre: "YouTube", usuario: "@poppingdropstephrc5973", url: "https://www.youtube.com/channel/UCMguHbCKnICZexfW5kYJa7w" }], historia: [], videos: [], proyectos: [] },
-            { id: "b9", nombre: "Dulce", estilo: "Dancehall", edad: 21, genero: "Femenino", foto: "img/bailarin6.jpg", pais: "Mexico", estado: "Michoacan", ciudad: "Morelia", rankingMundial: 4, rankingLocal: 2, redes: [{ nombre: "YouTube", usuario: "@poppingdropstephrc5973", url: "https://www.youtube.com/channel/UCMguHbCKnICZexfW5kYJa7w" }], historia: [], videos: [], proyectos: [] },
-            { id: "b9", nombre: "Dulce", estilo: "Dancehall", edad: 21, genero: "Femenino", foto: "img/bailarin6.jpg", pais: "Mexico", estado: "Michoacan", ciudad: "Morelia", rankingMundial: 4, rankingLocal: 2, redes: [{ nombre: "YouTube", usuario: "@poppingdropstephrc5973", url: "https://www.youtube.com/channel/UCMguHbCKnICZexfW5kYJa7w" }], historia: [], videos: [], proyectos: [] },
-            { id: "b9", nombre: "Dulce", estilo: "Dancehall", edad: 21, genero: "Femenino", foto: "img/bailarin6.jpg", pais: "Mexico", estado: "Michoacan", ciudad: "Morelia", rankingMundial: 4, rankingLocal: 2, redes: [{ nombre: "YouTube", usuario: "@poppingdropstephrc5973", url: "https://www.youtube.com/channel/UCMguHbCKnICZexfW5kYJa7w" }], historia: [], videos: [], proyectos: [] },
-            { id: "b9", nombre: "Dulce", estilo: "Dancehall", edad: 21, genero: "Femenino", foto: "img/bailarin6.jpg", pais: "Mexico", estado: "Michoacan", ciudad: "Morelia", rankingMundial: 4, rankingLocal: 2, redes: [{ nombre: "YouTube", usuario: "@poppingdropstephrc5973", url: "https://www.youtube.com/channel/UCMguHbCKnICZexfW5kYJa7w" }], historia: [], videos: [], proyectos: [] },
-            { id: "b9", nombre: "Dulce", estilo: "Dancehall", edad: 21, genero: "Femenino", foto: "img/bailarin6.jpg", pais: "Mexico", estado: "Michoacan", ciudad: "Morelia", rankingMundial: 4, rankingLocal: 2, redes: [{ nombre: "YouTube", usuario: "@poppingdropstephrc5973", url: "https://www.youtube.com/channel/UCMguHbCKnICZexfW5kYJa7w" }], historia: [], videos: [], proyectos: [] },
-            { id: "b9", nombre: "Dulce", estilo: "Dancehall", edad: 21, genero: "Femenino", foto: "img/bailarin6.jpg", pais: "Mexico", estado: "Michoacan", ciudad: "Morelia", rankingMundial: 4, rankingLocal: 2, redes: [{ nombre: "YouTube", usuario: "@poppingdropstephrc5973", url: "https://www.youtube.com/channel/UCMguHbCKnICZexfW5kYJa7w" }], historia: [], videos: [], proyectos: [] },
-            { id: "b9", nombre: "Dulce", estilo: "Dancehall", edad: 21, genero: "Femenino", foto: "img/bailarin6.jpg", pais: "Mexico", estado: "Michoacan", ciudad: "Morelia", rankingMundial: 4, rankingLocal: 2, redes: [{ nombre: "YouTube", usuario: "@poppingdropstephrc5973", url: "https://www.youtube.com/channel/UCMguHbCKnICZexfW5kYJa7w" }], historia: [], videos: [], proyectos: [] },
+            { 
+                id: "b1", 
+                nombre: "Zismo", 
+                estilo: "Dubstep / Animation", 
+                edad: 25, 
+                genero: "Masculino", 
+                foto: "imagenes/dropstep1.jpg", 
+                pais: "México", 
+                estado: "Michoacan", 
+                ciudad: "Morelia", 
+                rankingMundial: 2, 
+                rankingLocal: 1, 
+                redes: [
+                    { nombre: "YouTube", usuario: "@polodubstep", url: "https://youtube.com/@polodubstep" },
+                    { nombre: "Facebook", usuario: "Polo Dubstep", url: "https://facebook.com" },
+                    { nombre: "Instagram", usuario: "@universaldancersmx_", url: "https://www.instagram.com/universaldancersmx_/" },
+                    { nombre: "TikTok", usuario: "", url: "" }
+                ], 
+                historia: [
+                    { titulo: "La Creación de Universal Dancers MX", texto: "Este proyecto nació de la visión de Zismo para unificar y dar vitrina a los talentos ocultos del baile urbano. Cansado de ver que los algoritmos de siempre no apoyan el arte real, se propuso programar una plataforma interactiva propia para conectar los estilos más underground a nivel internacional.", imagen: "imagenes/dropstep1.jpg" }
+                ], 
+                videos: [], 
+                colaboraciones: [],
+                imagenes: [],
+                proyectos: [
+                    { nombre: "Universal Dancers MX", descripcion: "Plataforma internacional interactiva de baile urbano diseñada para conectar, proyectar y clasificar el talento underground del planeta sin depender de algoritmos comerciales." },
+                    { nombre: "Yesos Polo Digital", descripcion: "Desarrollo y automatización de software enfocado a la difusión e impulso de comunidades artísticas globales y comerciales." }
+                ] 
+            },
+            { id: "b2", nombre: "Seven Neo 777", estilo: "Jazz Funk", edad: 22, genero: "Femenino", foto: "imagenes/seven-neo-perfil1.jpg", pais: "México", estado: "Ciudad de Mexico", ciudad: "CDMX", rankingMundial: 5, rankingLocal: 2, redes: [{ nombre: "Facebook", usuario: "gokusayan.gomez", url: "https://www.facebook.com/gokusayan.gomez" }, { nombre: "Instagram", usuario: "@seven_neo_777_oficial", url: "https://www.instagram.com/seven_neo_777_oficial" }], historia: [], videos: [], colaboraciones: [], imagenes: [], proyectos: [] },
+            { id: "b7", nombre: "Joshua Cho", estilo: "Popping", edad: 20, genero: "Masculino", foto: "img/bailarin7.jpg", pais: "México", estado: "Michoacan", ciudad: "Nuevo Urecho", rankingMundial: 8, rankingLocal: 4, redes: [], historia: [], videos: [], colaboraciones: [], imagenes: [], proyectos: [] },
+            { id: "b3", nombre: "Polo Dubstep", estilo: "Dubstep / Animation", edad: 27, genero: "Masculino", foto: "imagenes/polo-dubstep-logo1.jpg", pais: "México", estado: "Michoacan", ciudad: "Morelia", rankingMundial: 1, rankingLocal: 1, redes: [{ nombre: "YouTube", usuario: "@polodubstep", url: "https://www.youtube.com/@polodubstep" }, { nombre: "Facebook", usuario: "PoloDubstep", url: "https://www.facebook.com/PoloDubstep" }, { nombre: "Instagram", usuario: "@_polodubstep", url: "https://www.instagram.com/_polodubstep/" }], historia: [], videos: [{ descripcion: "Freestyle session — uno de mis sets favoritos grabados en estudio. Dubstep puro.", url: "https://www.youtube.com/@polodubstep" }], colaboraciones: [], imagenes: [], proyectos: [] },
+            { id: "b4", nombre: "Chhris_barrios", estilo: "Contemporary Dance", edad: 25, genero: "Femenino", foto: "img/bailarin4.jpg", pais: "Francia", estado: "Isla de Francia", ciudad: "París", rankingMundial: 3, rankingLocal: 1, redes: [], historia: [], videos: [], colaboraciones: [], imagenes: [], proyectos: [] },
+            { id: "b8", nombre: "Jorge Art", estilo: "Estilo de Baile", edad: 0, genero: "—", foto: "imagenes/jorge-art-perfil1.jpg", pais: "México", estado: "", ciudad: "", rankingMundial: 99, rankingLocal: 99, redes: [{ nombre: "Facebook", usuario: "jorge9941", url: "https://www.facebook.com/jorge9941" }, { nombre: "Instagram", usuario: "@jorgeartcoria", url: "https://www.instagram.com/jorgeartcoria/" }], historia: [], videos: [], colaboraciones: [], imagenes: [], proyectos: [] },
+            { id: "b9", nombre: "Elio Enai", estilo: "Estilo de Baile", edad: 0, genero: "—", foto: "", pais: "México", estado: "", ciudad: "", rankingMundial: 99, rankingLocal: 99, redes: [{ nombre: "Facebook", usuario: "elio.moonwalker", url: "https://www.facebook.com/elio.moonwalker" }], historia: [], videos: [], colaboraciones: [], imagenes: [], proyectos: [] },
+            { id: "b10", nombre: "Jackson", estilo: "Estilo de Baile", edad: 0, genero: "—", foto: "", pais: "México", estado: "", ciudad: "", rankingMundial: 99, rankingLocal: 99, redes: [], historia: [], videos: [], colaboraciones: [], imagenes: [], proyectos: [] },
+            { id: "b11", nombre: "Marquese Scott", estilo: "Estilo de Baile", edad: 0, genero: "—", foto: "", pais: "México", estado: "", ciudad: "", rankingMundial: 99, rankingLocal: 99, redes: [{ nombre: "YouTube", usuario: "@WHZGUD2", url: "https://www.youtube.com/@WHZGUD2" }, { nombre: "Instagram", usuario: "@nonstop12", url: "https://www.instagram.com/nonstop12/" }, { nombre: "Facebook", usuario: "marquese.scott.2025", url: "https://www.facebook.com/marquese.scott.2025" }], historia: [], videos: [], colaboraciones: [], imagenes: [], proyectos: [] },
+            { id: "b12", nombre: "Alexis Dales", estilo: "Estilo de Baile", edad: 0, genero: "—", foto: "imagenes/alexis-dales-perfil1.jpg", pais: "México", estado: "", ciudad: "", rankingMundial: 99, rankingLocal: 99, redes: [{ nombre: "Facebook", usuario: "alexjisus.deles", url: "https://www.facebook.com/alexjisus.deles" }, { nombre: "Instagram", usuario: "@alexisdeles_dance", url: "https://www.instagram.com/alexisdeles_dance/" }], historia: [], videos: [], colaboraciones: [], imagenes: [], proyectos: [] },
+            { id: "b13", nombre: "Perfil 11", estilo: "Estilo de Baile", edad: 0, genero: "—", foto: "", pais: "México", estado: "", ciudad: "", rankingMundial: 99, rankingLocal: 99, redes: [], historia: [], videos: [], colaboraciones: [], imagenes: [], proyectos: [] },
+            { id: "b14", nombre: "Perfil 12", estilo: "Estilo de Baile", edad: 0, genero: "—", foto: "", pais: "México", estado: "", ciudad: "", rankingMundial: 99, rankingLocal: 99, redes: [], historia: [], videos: [], colaboraciones: [], imagenes: [], proyectos: [] },
+            { id: "b15", nombre: "Perfil 13", estilo: "Estilo de Baile", edad: 0, genero: "—", foto: "", pais: "México", estado: "", ciudad: "", rankingMundial: 99, rankingLocal: 99, redes: [], historia: [], videos: [], colaboraciones: [], imagenes: [], proyectos: [] },
+            { id: "b16", nombre: "Perfil 14", estilo: "Estilo de Baile", edad: 0, genero: "—", foto: "", pais: "México", estado: "", ciudad: "", rankingMundial: 99, rankingLocal: 99, redes: [], historia: [], videos: [], colaboraciones: [], imagenes: [], proyectos: [] },
+            { id: "b17", nombre: "Perfil 15", estilo: "Estilo de Baile", edad: 0, genero: "—", foto: "", pais: "México", estado: "", ciudad: "", rankingMundial: 99, rankingLocal: 99, redes: [], historia: [], videos: [], colaboraciones: [], imagenes: [], proyectos: [] }
         ];
 
         const publicaciones = [
@@ -757,53 +803,32 @@
             renderizarFeed();
         });
 
-        /* --- DETECTA PAÍSES ACTIVOS Y CONSTRUYE EL SELECTOR INICIAL --- */
         function inicializarSelectoresInteligentes() {
-            // Extrae los países únicos de la lista de bailarines reales
             let paisesConContenido = bailarines.map(b => b.pais).filter(p => p);
             paisesConContenido = [...new Set(paisesConContenido)].sort();
-
             const selectPais = document.getElementById("selectorPais");
             selectPais.innerHTML = `<option value="todos">🌍 Todos los Países (${paisesConContenido.length})</option>`;
-            
-            paisesConContenido.forEach(pais => {
-                selectPais.innerHTML += `<option value="${pais}">${pais}</option>`;
-            });
-
-            // Arrancamos los hijos limpios
+            paisesConContenido.forEach(pais => { selectPais.innerHTML += `<option value="${pais}">${pais}</option>`; });
             actualizarDesplegableEstados();
             actualizarDesplegableCiudades();
         }
 
-        /* --- LÓGICA DE FILTRADO Y RENDERIZADO --- */
         function renderizarBailarines() {
             const grid = document.getElementById("gridBailarines");
             grid.innerHTML = "";
-
             let listaFiltrada = [...bailarines];
             
-            if (paisFiltroActual !== "todos") {
-                listaFiltrada = listaFiltrada.filter(b => b.pais.toLowerCase() === paisFiltroActual.toLowerCase());
-            }
-            if (estadoFiltroActual !== "todos") {
-                listaFiltrada = listaFiltrada.filter(b => b.estado === estadoFiltroActual);
-            }
-            if (ciudadFiltroActual !== "todas") {
-                listaFiltrada = listaFiltrada.filter(b => b.ciudad === ciudadFiltroActual);
-            }
+            if (paisFiltroActual !== "todos") { listaFiltrada = listaFiltrada.filter(b => b.pais.toLowerCase() === paisFiltroActual.toLowerCase()); }
+            if (estadoFiltroActual !== "todos") { listaFiltrada = listaFiltrada.filter(b => b.estado === estadoFiltroActual); }
+            if (ciudadFiltroActual !== "todas") { listaFiltrada = listaFiltrada.filter(b => b.ciudad === ciudadFiltroActual); }
 
-            // Ordenamiento por rangos
-            if (paisFiltroActual === "todos") {
-                listaFiltrada.sort((a, b) => a.rankingMundial - b.rankingMundial);
-            } else {
-                listaFiltrada.sort((a, b) => a.rankingLocal - b.rankingLocal);
-            }
+            if (paisFiltroActual === "todos") { listaFiltrada.sort((a, b) => a.rankingMundial - b.rankingMundial); }
+            else { listaFiltrada.sort((a, b) => a.rankingLocal - b.rankingLocal); }
 
             listaFiltrada.forEach(b => {
                 const tarjeta = document.createElement("div");
                 tarjeta.className = "tarjeta-bailarin";
                 tarjeta.onclick = () => abrirVisorBailarin(b.id);
-                
                 tarjeta.innerHTML = `
                     <div class="contenedor-foto">
                         <div class="contenedor-etiquetas-rank">
@@ -822,100 +847,44 @@
             });
         }
 
-        /* --- MANEJADORES DE EVENTOS DE SELECTOR --- */
         function cambiarPaisFiltro(pais) {
-            paisFiltroActual = pais;
-            estadoFiltroActual = "todos"; 
-            ciudadFiltroActual = "todas"; 
-
-            actualizarDesplegableEstados();
-            actualizarDesplegableCiudades();
-            renderizarBailarines(); 
+            paisFiltroActual = pais; estadoFiltroActual = "todos"; ciudadFiltroActual = "todas";
+            actualizarDesplegableEstados(); actualizarDesplegableCiudades(); renderizarBailarines();
         }
 
         function cambiarEstadoFiltro(estado) {
-            estadoFiltroActual = estado;
-            ciudadFiltroActual = "todas"; 
-
-            actualizarDesplegableCiudades();
-            renderizarBailarines(); 
+            estadoFiltroActual = estado; ciudadFiltroActual = "todas";
+            actualizarDesplegableCiudades(); renderizarBailarines();
         }
 
-        function cambiarCiudadFiltro(ciudad) {
-            ciudadFiltroActual = ciudad;
-            renderizarBailarines(); 
-        }
+        function cambiarCiudadFiltro(ciudad) { ciudadFiltroActual = ciudad; renderizarBailarines(); }
 
-        /* --- CONSTRUCCIÓN DINÁMICA DE BOTONES BASADOS EN CONTENIDO --- */
         function actualizarDesplegableEstados() {
             const selectEstado = document.getElementById("selectorEstado");
             selectEstado.innerHTML = `<option value="todos">🌍 Todos los Estados</option>`;
-
             if (paisFiltroActual !== "todos") {
-                // Filtra bailarines del país seleccionado, toma sus estados, remueve duplicados y ordena
-                let estadosConContenido = bailarines
-                    .filter(b => b.pais.toLowerCase() === paisFiltroActual.toLowerCase() && b.estado)
-                    .map(b => b.estado);
-                
+                let estadosConContenido = bailarines.filter(b => b.pais.toLowerCase() === paisFiltroActual.toLowerCase() && b.estado).map(b => b.estado);
                 estadosConContenido = [...new Set(estadosConContenido)].sort();
-                
-                estadosConContenido.forEach(est => {
-                    selectEstado.innerHTML += `<option value="${est}">${est}</option>`;
-                });
+                estadosConContenido.forEach(est => { selectEstado.innerHTML += `<option value="${est}">${est}</option>`; });
             }
         }
 
         function actualizarDesplegableCiudades() {
             const selectCiudad = document.getElementById("selectorCiudad");
             selectCiudad.innerHTML = `<option value="todas">📍 Todas las Ciudades</option>`;
-
             if (paisFiltroActual === "todos") return;
-
-            // Filtra por país actual
             let bailarinesFiltrados = bailarines.filter(b => b.pais.toLowerCase() === paisFiltroActual.toLowerCase());
-
-            // Si además hay un estado elegido, reduce el filtro a ese estado
-            if (estadoFiltroActual !== "todos") {
-                bailarinesFiltrados = bailarinesFiltrados.filter(b => b.estado === estadoFiltroActual);
-            }
-
-            // Extrae ciudades únicas
+            if (estadoFiltroActual !== "todos") { bailarinesFiltrados = bailarinesFiltrados.filter(b => b.estado === estadoFiltroActual); }
             let ciudadesConContenido = bailarinesFiltrados.map(b => b.ciudad).filter(c => c);
             ciudadesConContenido = [...new Set(ciudadesConContenido)].sort();
-
-            ciudadesConContenido.forEach(ciu => {
-                selectCiudad.innerHTML += `<option value="${ciu}">${ciu}</option>`;
-            });
-        }
-
-        /* --- RESTO DE FUNCIONES (FEED, VISOR MODAL, PESTAÑAS) --- */
-        function renderizarFeed() {
-            const feed = document.getElementById("contenedorFeed");
-            feed.innerHTML = "";
-            publicaciones.forEach(post => {
-                const artista = bailarines.find(b => b.id === post.idBailarin);
-                if (!artista) return;
-                const tarjetaPost = document.createElement("div");
-                tarjetaPost.className = "tarjeta-publicacion";
-                tarjetaPost.innerHTML = `
-                    <div class="cabecera-publicacion">
-                        <div class="perfil-creador" onclick="abrirVisorBailarin('${artista.id}')">
-                            <img src="${artista.foto}" class="avatar-creador" onerror="this.src='https://via.placeholder.com/40/444/fff?text=A'">
-                            <span class="nombre-creador">${artista.nombre}</span>
-                        </div>
-                        <span class="fecha-publicacion">10 de mayo de 2026</span>
-                    </div>
-                    <div class="cuerpo-publicacion"><img src="${post.multimedia}" class="multimedia-publicacion"></div>
-                    <div class="pie-publicacion"><p>${post.descripcion}</p></div>
-                `;
-                feed.appendChild(tarjetaPost);
-            });
+            ciudadesConContenido.forEach(ciu => { selectCiudad.innerHTML += `<option value="${ciu}">${ciu}</option>`; });
         }
 
         function abrirVisorBailarin(idBailarin) {
             const b = bailarines.find(item => item.id === idBailarin);
             if (!b) return;
             idArtistaSeleccionadoActivo = idBailarin;
+
             document.getElementById("modalFoto").src = b.foto;
             document.getElementById("modalNombre").innerText = b.nombre;
             document.getElementById("modalEstilo").innerText = b.estilo;
@@ -923,36 +892,122 @@
             document.getElementById("modalGenero").innerText = b.genero;
             document.getElementById("modalUbicacion").innerText = `${b.ciudad}, ${b.estado || b.pais}`;
             document.getElementById("modalRanks").innerText = `Global #${b.rankingMundial} / Local #${b.rankingLocal}`;
-            cambiarSubPestana('historia');
+            
+            const contenedorRedes = document.getElementById("modalRedes");
+            contenedorRedes.innerHTML = "";
+            
+            if (b.redes && b.redes.length > 0) {
+                b.redes.forEach(red => {
+                    if (red.url && red.url.trim() !== "") {
+                        const link = document.createElement("a");
+                        link.href = red.url;
+                        link.target = "_blank";
+                        const tipo = red.nombre.toLowerCase();
+                        link.className = `link-red-modal ${tipo}`;
+                        let icono = `<i class="fa-solid fa-link"></i>`;
+                        if (tipo.includes('youtube')) icono = `<i class="fa-brands fa-youtube"></i>`;
+                        if (tipo.includes('facebook')) icono = `<i class="fa-brands fa-facebook-f"></i>`;
+                        if (tipo.includes('instagram')) icono = `<i class="fa-brands fa-instagram"></i>`;
+                        if (tipo.includes('tiktok')) icono = `<i class="fa-brands fa-tiktok"></i>`;
+                        link.innerHTML = icono;
+                        contenedorRedes.appendChild(link);
+                    }
+                });
+            }
+
+            cambiarSubPestana('proyectos');
             document.getElementById("visorModal").style.display = "flex";
+            if (window.innerWidth > 750) document.body.style.overflow = "hidden";
         }
 
         function cambiarSubPestana(seccion) {
-            document.getElementById("btnBlogHistoria").classList.remove("activo");
-            document.getElementById("btnBlogVideos").classList.remove("activo");
             document.getElementById("btnBlogProyectos").classList.remove("activo");
-            if (seccion === 'historia') document.getElementById("btnBlogHistoria").classList.add("activo");
-            if (seccion === 'videos') document.getElementById("btnBlogVideos").classList.add("activo");
+            document.getElementById("btnBlogColaboraciones").classList.remove("activo");
+            document.getElementById("btnBlogImagenes").classList.remove("activo");
+            document.getElementById("btnBlogVideos").classList.remove("activo");
             if (seccion === 'proyectos') document.getElementById("btnBlogProyectos").classList.add("activo");
+            if (seccion === 'colaboraciones') document.getElementById("btnBlogColaboraciones").classList.add("activo");
+            if (seccion === 'imagenes') document.getElementById("btnBlogImagenes").classList.add("activo");
+            if (seccion === 'videos') document.getElementById("btnBlogVideos").classList.add("activo");
 
             const areaContenido = document.getElementById("areaContenidoBlog");
             const b = bailarines.find(item => item.id === idArtistaSeleccionadoActivo);
             areaContenido.innerHTML = "";
             if (!b) return;
 
-            if (seccion === 'historia') {
-                if(!b.historia || b.historia.length === 0) {
-                    areaContenido.innerHTML = `<p style="color:#666; font-style:italic;">Sin historia redactada.</p>`;
+            if (seccion === 'proyectos') {
+                if (!b.proyectos || b.proyectos.length === 0) {
+                    areaContenido.innerHTML = `<p style="color:#666; font-style:italic;">No hay proyectos documentados.</p>`;
                     return;
                 }
-                b.historia.forEach(seg => {
-                    areaContenido.innerHTML += `<div class="segmento-historia"><h3>${seg.titulo}</h3><p>${seg.texto}</p></div>`;
+                b.proyectos.forEach(pro => {
+                    let bloqueRedesProyectoHtml = "";
+                    if (pro.nombre === "Universal Dancers MX" && b.id === "b1") {
+                        bloqueRedesProyectoHtml = `
+                            <div class="bloque-redes-proyecto">
+                                <a href="https://youtube.com/@polodubstep" target="_blank" class="btn-proyecto-red" style="background: #ff0000;"><i class="fa-brands fa-youtube"></i> YouTube</a>
+                                <a href="https://facebook.com" target="_blank" class="btn-proyecto-red" style="background: #1877f2;"><i class="fa-brands fa-facebook-f"></i> Facebook</a>
+                                <a href="https://www.instagram.com/universaldancersmx_/" target="_blank" class="btn-proyecto-red" style="background: #e1306c;"><i class="fa-brands fa-instagram"></i> Instagram</a>
+                            </div>
+                        `;
+                    }
+                    areaContenido.innerHTML += `
+                        <div class="tarjeta-proyecto-blog" style="margin-bottom:15px;">
+                            <h3>${pro.nombre}</h3>
+                            <p>${pro.descripcion}</p>
+                            ${bloqueRedesProyectoHtml}
+                        </div>
+                    `;
                 });
             }
-            if (seccion === 'videos') { areaContenido.innerHTML = `<p style="color:#666; font-style:italic;">No hay videos destacados.</p>`; }
-            if (seccion === 'proyectos') {
-                b.proyectos.forEach(pro => {
-                    areaContenido.innerHTML += `<div class="tarjeta-proyecto-blog"><h3>${pro.nombre}</h3><p>${pro.descripcion}</p></div>`;
+
+            if (seccion === 'colaboraciones') {
+                if (!b.colaboraciones || b.colaboraciones.length === 0) {
+                    areaContenido.innerHTML = `<p style="color:#666; font-style:italic;">No hay colaboraciones registradas.</p>`;
+                    return;
+                }
+                b.colaboraciones.forEach(col => {
+                    areaContenido.innerHTML += `
+                        <div class="tarjeta-proyecto-blog" style="margin-bottom:15px;">
+                            <h3>${col.nombre}</h3>
+                            <p>${col.descripcion}</p>
+                        </div>
+                    `;
+                });
+            }
+
+            if (seccion === 'imagenes') {
+                if (!b.imagenes || b.imagenes.length === 0) {
+                    areaContenido.innerHTML = `<p style="color:#666; font-style:italic;">No hay imágenes publicadas.</p>`;
+                    return;
+                }
+                const grid = document.createElement("div");
+                grid.style.cssText = "display:grid; grid-template-columns: repeat(2,1fr); gap:10px;";
+                b.imagenes.forEach(img => {
+                    grid.innerHTML += `
+                        <div style="border-radius:8px; overflow:hidden; background:#161616; border:1px solid #222;">
+                            <img src="${img.src}" alt="${img.descripcion}" style="width:100%; height:140px; object-fit:cover; display:block;" onerror="this.style.display='none'">
+                            <p style="margin:0; padding:8px 10px; font-size:12px; color:#888;">${img.descripcion}</p>
+                        </div>
+                    `;
+                });
+                areaContenido.appendChild(grid);
+            }
+
+            if (seccion === 'videos') {
+                if (!b.videos || b.videos.length === 0) {
+                    areaContenido.innerHTML = `<p style="color:#666; font-style:italic;">No hay videos destacados.</p>`;
+                    return;
+                }
+                b.videos.forEach(vid => {
+                    areaContenido.innerHTML += `
+                        <div class="tarjeta-video-blog">
+                            <p class="video-descripcion">${vid.descripcion}</p>
+                            <a href="${vid.url}" target="_blank" class="btn-ver-video">
+                                <i class="fa-brands fa-youtube"></i> Ver video
+                            </a>
+                        </div>
+                    `;
                 });
             }
         }
@@ -971,9 +1026,42 @@
             }
         }
 
-        function cerrarVisor() { document.getElementById("visorModal").style.display = "none"; }
-        function cerrarModalExterno(e) { if (e.target === document.getElementById("visorModal")) cerrarVisor(); }
-        function abrirVideoOriginal() { window.open('videos/banner-baile.mp4', '_blank'); }
+        function renderizarFeed() {
+            const feed = document.getElementById("contenedorFeed");
+            feed.innerHTML = "";
+            publicaciones.forEach(post => {
+                const b = bailarines.find(item => item.id === post.idBailarin);
+                if (!b) return;
+                feed.innerHTML += `
+                    <div class="tarjeta-publicacion">
+                        <div class="cabecera-publicacion">
+                            <div class="perfil-creador" onclick="abrirVisorBailarin('${b.id}')">
+                                <img src="${b.foto}" alt="${b.nombre}" class="avatar-creador" onerror="this.src='https://via.placeholder.com/40x40/222/fff?text=?'">
+                                <span class="nombre-creador">${b.nombre}</span>
+                            </div>
+                            <span class="fecha-publicacion">${post.fecha}</span>
+                        </div>
+                        <div class="cuerpo-publicacion">
+                            <img src="${post.multimedia}" alt="Publicación" class="multimedia-publicacion">
+                        </div>
+                        <div class="pie-publicacion"><p>${post.descripcion}</p></div>
+                    </div>
+                `;
+            });
+        }
+
+        function cerrarVisor() {
+            document.getElementById("visorModal").style.display = "none";
+            document.body.style.overflow = "auto";
+        }
+
+        function cerrarModalExterno(e) {
+            if (e.target === document.getElementById("visorModal")) cerrarVisor();
+        }
+
+        function abrirVideoOriginal() {
+            window.open('videos/banner-baile.mp4', '_blank');
+        }
     </script>
 </body>
 </html>
