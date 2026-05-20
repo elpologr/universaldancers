@@ -726,11 +726,12 @@
             </div>
 
             <div class="modal-detalles-derecha">
-                <div class="menu-sub-pestanas">
+                <div class="menu-sub-pestanas" style="grid-template-columns: repeat(5, 1fr);">
                     <button id="btnBlogProyectos" class="btn-sub-pestana activo" onclick="cambiarSubPestana('proyectos')">Proyectos</button>
                     <button id="btnBlogColaboraciones" class="btn-sub-pestana" onclick="cambiarSubPestana('colaboraciones')">Colaboraciones</button>
                     <button id="btnBlogImagenes" class="btn-sub-pestana" onclick="cambiarSubPestana('imagenes')">Imágenes</button>
                     <button id="btnBlogVideos" class="btn-sub-pestana" onclick="cambiarSubPestana('videos')">Videos</button>
+                    <button id="btnBlogMejoresTrab" class="btn-sub-pestana" onclick="cambiarSubPestana('mejorestrabajos')">Mejores Trabajos</button>
                 </div>
                 <div id="areaContenidoBlog" class="area-contenido-blog"></div>
             </div>
@@ -773,19 +774,19 @@
                 ] 
             },
             { id: "b2", nombre: "Seven Neo 777", estilo: "Jazz Funk", edad: 22, genero: "Femenino", foto: "imagenes/seven-neo-perfil1.jpg", pais: "México", estado: "Ciudad de Mexico", ciudad: "CDMX", rankingMundial: 5, rankingLocal: 2, redes: [{ nombre: "Facebook", usuario: "gokusayan.gomez", url: "https://www.facebook.com/gokusayan.gomez" }, { nombre: "Instagram", usuario: "@seven_neo_777_oficial", url: "https://www.instagram.com/seven_neo_777_oficial" }], historia: [], videos: [], colaboraciones: [], imagenes: [], proyectos: [] },
-            { id: "b7", nombre: "Joshua Cho", estilo: "Popping", edad: 20, genero: "Masculino", foto: "img/bailarin7.jpg", pais: "México", estado: "Michoacan", ciudad: "Nuevo Urecho", rankingMundial: 8, rankingLocal: 4, redes: [], historia: [], videos: [], colaboraciones: [], imagenes: [], proyectos: [] },
+            { id: "b7", nombre: "Joshua Cho", estilo: "Popping", edad: 20, genero: "Masculino", foto: "imagenes/joshua-cho-perfil1.jpg", pais: "México", estado: "Michoacan", ciudad: "Nuevo Urecho", rankingMundial: 8, rankingLocal: 4, redes: [], historia: [], videos: [], colaboraciones: [], imagenes: [], proyectos: [] },
             { id: "b3", nombre: "Polo Dubstep", estilo: "Dubstep / Animation", edad: 27, genero: "Masculino", foto: "imagenes/polo-dubstep-logo1.jpg", pais: "México", estado: "Michoacan", ciudad: "Morelia", rankingMundial: 1, rankingLocal: 1, redes: [{ nombre: "YouTube", usuario: "@polodubstep", url: "https://www.youtube.com/@polodubstep" }, { nombre: "Facebook", usuario: "PoloDubstep", url: "https://www.facebook.com/PoloDubstep" }, { nombre: "Instagram", usuario: "@_polodubstep", url: "https://www.instagram.com/_polodubstep/" }], historia: [], videos: [{ descripcion: "Freestyle session — uno de mis sets favoritos grabados en estudio. Dubstep puro.", url: "https://www.youtube.com/@polodubstep" }], colaboraciones: [], imagenes: [], proyectos: [] },
-            { id: "b4", nombre: "Chhris_barrios", estilo: "Contemporary Dance", edad: 25, genero: "Femenino", foto: "img/bailarin4.jpg", pais: "Francia", estado: "Isla de Francia", ciudad: "París", rankingMundial: 3, rankingLocal: 1, redes: [], historia: [], videos: [], colaboraciones: [], imagenes: [], proyectos: [] },
+            { id: "b4", nombre: "Chhris Barrios", estilo: "Hip Hop", edad: 25, genero: "Femenino", foto: "imagenes/chhris-barrios-perfil1.jpg", pais: "Francia", estado: "Isla de Francia", ciudad: "París", rankingMundial: 3, rankingLocal: 1, redes: [{ nombre: "Instagram", usuario: "@chhris_barrios", url: "https://www.instagram.com/chhris_barrios/" }], historia: [], videos: [], colaboraciones: [], imagenes: [], proyectos: [] },
             { id: "b8", nombre: "Jorge Art", estilo: "Estilo de Baile", edad: 0, genero: "—", foto: "imagenes/jorge-art-perfil1.jpg", pais: "México", estado: "", ciudad: "", rankingMundial: 99, rankingLocal: 99, redes: [{ nombre: "Facebook", usuario: "jorge9941", url: "https://www.facebook.com/jorge9941" }, { nombre: "Instagram", usuario: "@jorgeartcoria", url: "https://www.instagram.com/jorgeartcoria/" }], historia: [], videos: [], colaboraciones: [], imagenes: [], proyectos: [] },
-            { id: "b9", nombre: "Elio Enai", estilo: "Estilo de Baile", edad: 0, genero: "—", foto: "", pais: "México", estado: "", ciudad: "", rankingMundial: 99, rankingLocal: 99, redes: [{ nombre: "Facebook", usuario: "elio.moonwalker", url: "https://www.facebook.com/elio.moonwalker" }], historia: [], videos: [], colaboraciones: [], imagenes: [], proyectos: [] },
-            { id: "b10", nombre: "Jackson", estilo: "Estilo de Baile", edad: 0, genero: "—", foto: "", pais: "México", estado: "", ciudad: "", rankingMundial: 99, rankingLocal: 99, redes: [], historia: [], videos: [], colaboraciones: [], imagenes: [], proyectos: [] },
-            { id: "b11", nombre: "Marquese Scott", estilo: "Estilo de Baile", edad: 0, genero: "—", foto: "", pais: "México", estado: "", ciudad: "", rankingMundial: 99, rankingLocal: 99, redes: [{ nombre: "YouTube", usuario: "@WHZGUD2", url: "https://www.youtube.com/@WHZGUD2" }, { nombre: "Instagram", usuario: "@nonstop12", url: "https://www.instagram.com/nonstop12/" }, { nombre: "Facebook", usuario: "marquese.scott.2025", url: "https://www.facebook.com/marquese.scott.2025" }], historia: [], videos: [], colaboraciones: [], imagenes: [], proyectos: [] },
+            { id: "b9", nombre: "Elio Enai", estilo: "Estilo de Baile", edad: 0, genero: "—", foto: "imagenes/elio-enai-perfil1.jpg", pais: "México", estado: "", ciudad: "", rankingMundial: 99, rankingLocal: 99, redes: [{ nombre: "Facebook", usuario: "elio.moonwalker", url: "https://www.facebook.com/elio.moonwalker" }], historia: [], videos: [], colaboraciones: [], imagenes: [], proyectos: [] },
+            { id: "b10", nombre: "Jackson Isaac", estilo: "Estilo de Baile", edad: 0, genero: "—", foto: "imagenes/jackson-isaac-perfil1.jpg", pais: "México", estado: "", ciudad: "", rankingMundial: 99, rankingLocal: 99, redes: [], historia: [], videos: [], colaboraciones: [], imagenes: [], proyectos: [] },
+            { id: "b11", nombre: "Marquese Scott", estilo: "Estilo de Baile", edad: 44, genero: "—", foto: "imagenes/marquese-scott-perfil1.jpg", pais: "México", estado: "", ciudad: "", rankingMundial: 99, rankingLocal: 99, redes: [{ nombre: "YouTube", usuario: "@WHZGUD2", url: "https://www.youtube.com/@WHZGUD2" }, { nombre: "Instagram", usuario: "@nonstop12", url: "https://www.instagram.com/nonstop12/" }, { nombre: "Facebook", usuario: "marquese.scott.2025", url: "https://www.facebook.com/marquese.scott.2025" }], historia: [], videos: [], colaboraciones: [], imagenes: [], proyectos: [], mejoresTrabajosHTML: [{ titulo: "Página en Wikipedia", url: "https://en.wikipedia.org/wiki/Marquese_Scott", descripcion: "Perfil oficial en Wikipedia sobre Marquese Scott (Nonstop)." }, { titulo: "Video más viral", url: "https://www.youtube.com/watch?v=LXO-jKksQkM&t=14s&pp=ygUebWFycXVlc2Ugc2NvdHQgcHVtcGVkIHVwIGtpY2tz", descripcion: "Su video más viral en YouTube — Pumped Up Kicks." }] },
             { id: "b12", nombre: "Alexis Dales", estilo: "Estilo de Baile", edad: 0, genero: "—", foto: "imagenes/alexis-dales-perfil1.jpg", pais: "México", estado: "", ciudad: "", rankingMundial: 99, rankingLocal: 99, redes: [{ nombre: "Facebook", usuario: "alexjisus.deles", url: "https://www.facebook.com/alexjisus.deles" }, { nombre: "Instagram", usuario: "@alexisdeles_dance", url: "https://www.instagram.com/alexisdeles_dance/" }], historia: [], videos: [], colaboraciones: [], imagenes: [], proyectos: [] },
-            { id: "b13", nombre: "Perfil 11", estilo: "Estilo de Baile", edad: 0, genero: "—", foto: "", pais: "México", estado: "", ciudad: "", rankingMundial: 99, rankingLocal: 99, redes: [], historia: [], videos: [], colaboraciones: [], imagenes: [], proyectos: [] },
-            { id: "b14", nombre: "Perfil 12", estilo: "Estilo de Baile", edad: 0, genero: "—", foto: "", pais: "México", estado: "", ciudad: "", rankingMundial: 99, rankingLocal: 99, redes: [], historia: [], videos: [], colaboraciones: [], imagenes: [], proyectos: [] },
-            { id: "b15", nombre: "Perfil 13", estilo: "Estilo de Baile", edad: 0, genero: "—", foto: "", pais: "México", estado: "", ciudad: "", rankingMundial: 99, rankingLocal: 99, redes: [], historia: [], videos: [], colaboraciones: [], imagenes: [], proyectos: [] },
-            { id: "b16", nombre: "Perfil 14", estilo: "Estilo de Baile", edad: 0, genero: "—", foto: "", pais: "México", estado: "", ciudad: "", rankingMundial: 99, rankingLocal: 99, redes: [], historia: [], videos: [], colaboraciones: [], imagenes: [], proyectos: [] },
-            { id: "b17", nombre: "Perfil 15", estilo: "Estilo de Baile", edad: 0, genero: "—", foto: "", pais: "México", estado: "", ciudad: "", rankingMundial: 99, rankingLocal: 99, redes: [], historia: [], videos: [], colaboraciones: [], imagenes: [], proyectos: [] }
+            { id: "b13", nombre: "Thadeo Dancer", estilo: "Estilo de Baile", edad: 0, genero: "—", foto: "imagenes/thadeo-dancer-perfil1.jpg", pais: "México", estado: "", ciudad: "", rankingMundial: 99, rankingLocal: 99, redes: [], historia: [], videos: [], colaboraciones: [], imagenes: [], proyectos: [] },
+            { id: "b14", nombre: "Aranza", estilo: "Estilo de Baile", edad: 0, genero: "—", foto: "", pais: "México", estado: "", ciudad: "", rankingMundial: 99, rankingLocal: 99, redes: [], historia: [], videos: [], colaboraciones: [], imagenes: [], proyectos: [] },
+            { id: "b15", nombre: "Daiko", estilo: "Estilo de Baile", edad: 30, genero: "—", foto: "", pais: "México", estado: "Michoacan", ciudad: "Morelia", rankingMundial: 99, rankingLocal: 99, redes: [], historia: [], videos: [], colaboraciones: [], imagenes: [], proyectos: [] },
+            { id: "b16", nombre: "Vanessa Power Kujawiak", estilo: "Estilo de Baile", edad: 0, genero: "—", foto: "imagenes/vanessa-power-perfil1.jpg", pais: "México", estado: "", ciudad: "", rankingMundial: 99, rankingLocal: 99, redes: [{ nombre: "Instagram", usuario: "@vanessa_power_kujawiak", url: "https://www.instagram.com/vanessa_power_kujawiak/" }], historia: [], videos: [], colaboraciones: [], imagenes: [], proyectos: [] },
+            { id: "b17", nombre: "Dyd Dance", estilo: "Hip Hop", edad: 0, genero: "—", foto: "imagenes/dyd-dance-perfil1.jpg", pais: "México", estado: "", ciudad: "", rankingMundial: 99, rankingLocal: 99, redes: [{ nombre: "Instagram", usuario: "@dyd_dance", url: "https://www.instagram.com/dyd_dance/" }], historia: [], videos: [], colaboraciones: [], imagenes: [], proyectos: [] }
         ];
 
         const publicaciones = [
@@ -835,7 +836,7 @@
                             <span class="etiqueta-ranking">🌍 Global: #${b.rankingMundial}</span>
                             <span class="etiqueta-ranking local">📍 Local: #${b.rankingLocal}</span>
                         </div>
-                        <img src="${b.foto}" alt="${b.nombre}" class="foto-bailarin" onerror="this.src='https://via.placeholder.com/240x240/222/fff?text=${b.nombre}'">
+                        <img src="${b.foto}" alt="${b.nombre}" class="foto-bailarin" onerror="this.src='https://via.placeholder.com/240x240/222/fff?text=?'">
                     </div>
                     <div class="info-tarjeta-bailarin">
                         <h3>${b.nombre}</h3>
@@ -925,10 +926,12 @@
             document.getElementById("btnBlogColaboraciones").classList.remove("activo");
             document.getElementById("btnBlogImagenes").classList.remove("activo");
             document.getElementById("btnBlogVideos").classList.remove("activo");
+            document.getElementById("btnBlogMejoresTrab").classList.remove("activo");
             if (seccion === 'proyectos') document.getElementById("btnBlogProyectos").classList.add("activo");
             if (seccion === 'colaboraciones') document.getElementById("btnBlogColaboraciones").classList.add("activo");
             if (seccion === 'imagenes') document.getElementById("btnBlogImagenes").classList.add("activo");
             if (seccion === 'videos') document.getElementById("btnBlogVideos").classList.add("activo");
+            if (seccion === 'mejorestrabajos') document.getElementById("btnBlogMejoresTrab").classList.add("activo");
 
             const areaContenido = document.getElementById("areaContenidoBlog");
             const b = bailarines.find(item => item.id === idArtistaSeleccionadoActivo);
@@ -1005,6 +1008,24 @@
                             <p class="video-descripcion">${vid.descripcion}</p>
                             <a href="${vid.url}" target="_blank" class="btn-ver-video">
                                 <i class="fa-brands fa-youtube"></i> Ver video
+                            </a>
+                        </div>
+                    `;
+                });
+            }
+
+            if (seccion === 'mejorestrabajos') {
+                if (!b.mejoresTrabajosHTML || b.mejoresTrabajosHTML.length === 0) {
+                    areaContenido.innerHTML = `<p style="color:#666; font-style:italic;">No hay trabajos destacados registrados.</p>`;
+                    return;
+                }
+                b.mejoresTrabajosHTML.forEach(trabajo => {
+                    areaContenido.innerHTML += `
+                        <div class="tarjeta-proyecto-blog" style="margin-bottom:15px;">
+                            <h3>${trabajo.titulo}</h3>
+                            <p>${trabajo.descripcion}</p>
+                            <a href="${trabajo.url}" target="_blank" class="btn-ver-video" style="display:inline-flex; align-items:center; gap:8px; margin-top:8px;">
+                                <i class="fa-solid fa-arrow-up-right-from-square"></i> Ver enlace
                             </a>
                         </div>
                     `;
