@@ -743,6 +743,15 @@
     </footer>
 
     <script>
+        // Placeholders SVG locales — sin peticiones externas, sin bucles de error
+        const SVG_PLACEHOLDER_GRANDE = "data:image/svg+xml," + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="240" height="240"><rect width="240" height="240" fill="#202020"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="60" fill="#444">?</text></svg>');
+        const SVG_PLACEHOLDER_AVATAR = "data:image/svg+xml," + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"><rect width="40" height="40" fill="#202020"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="18" fill="#444">?</text></svg>');
+        const SVG_PLACEHOLDER_MODAL  = "data:image/svg+xml," + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="290" height="300"><rect width="290" height="300" fill="#202020"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="80" fill="#444">?</text></svg>');
+
+        function fotoOFallback(src) {
+            return (src && src.trim() !== "") ? src : SVG_PLACEHOLDER_GRANDE;
+        }
+
         const bailarines = [
             { 
                 id: "b1", 
@@ -783,10 +792,20 @@
             { id: "b11", nombre: "Marquese Scott", estilo: "Estilo de Baile", edad: 44, genero: "—", foto: "imagenes/marquese-scott-perfil1.jpg", pais: "México", estado: "", ciudad: "", rankingMundial: 99, rankingLocal: 99, redes: [{ nombre: "YouTube", usuario: "@WHZGUD2", url: "https://www.youtube.com/@WHZGUD2" }, { nombre: "Instagram", usuario: "@nonstop12", url: "https://www.instagram.com/nonstop12/" }, { nombre: "Facebook", usuario: "marquese.scott.2025", url: "https://www.facebook.com/marquese.scott.2025" }], historia: [], videos: [], colaboraciones: [], imagenes: [], proyectos: [], mejoresTrabajosHTML: [{ titulo: "Página en Wikipedia", url: "https://en.wikipedia.org/wiki/Marquese_Scott", descripcion: "Perfil oficial en Wikipedia sobre Marquese Scott (Nonstop)." }, { titulo: "Video más viral", url: "https://www.youtube.com/watch?v=LXO-jKksQkM&t=14s&pp=ygUebWFycXVlc2Ugc2NvdHQgcHVtcGVkIHVwIGtpY2tz", descripcion: "Su video más viral en YouTube — Pumped Up Kicks." }] },
             { id: "b12", nombre: "Alexis Dales", estilo: "Estilo de Baile", edad: 0, genero: "—", foto: "imagenes/alexis-dales-perfil1.jpg", pais: "México", estado: "", ciudad: "", rankingMundial: 99, rankingLocal: 99, redes: [{ nombre: "Facebook", usuario: "alexjisus.deles", url: "https://www.facebook.com/alexjisus.deles" }, { nombre: "Instagram", usuario: "@alexisdeles_dance", url: "https://www.instagram.com/alexisdeles_dance/" }], historia: [], videos: [], colaboraciones: [], imagenes: [], proyectos: [] },
             { id: "b13", nombre: "Thadeo Dancer", estilo: "Estilo de Baile", edad: 0, genero: "—", foto: "imagenes/thadeo-dancer-perfil1.jpg", pais: "México", estado: "", ciudad: "", rankingMundial: 99, rankingLocal: 99, redes: [], historia: [], videos: [], colaboraciones: [], imagenes: [], proyectos: [] },
-            { id: "b14", nombre: "Aranza", estilo: "Estilo de Baile", edad: 0, genero: "—", foto: "", pais: "México", estado: "", ciudad: "", rankingMundial: 99, rankingLocal: 99, redes: [], historia: [], videos: [], colaboraciones: [], imagenes: [], proyectos: [] },
-            { id: "b15", nombre: "Daiko", estilo: "Estilo de Baile", edad: 30, genero: "—", foto: "", pais: "México", estado: "Michoacan", ciudad: "Morelia", rankingMundial: 99, rankingLocal: 99, redes: [], historia: [], videos: [], colaboraciones: [], imagenes: [], proyectos: [] },
+            { id: "b14", nombre: "Nikitaenc0re", estilo: "Estilo de Baile", edad: 0, genero: "—", foto: "imagenes/nikitaenc0re-perfil1.jpg", pais: "Rusia", estado: "", ciudad: "", rankingMundial: 99, rankingLocal: 99, redes: [{ nombre: "Instagram", usuario: "@nikitaenc0re", url: "https://www.instagram.com/nikitaenc0re/" }], historia: [], videos: [], colaboraciones: [], imagenes: [], proyectos: [] },
+            { id: "b15", nombre: "Loqque", estilo: "Electro / Break Dance", edad: 27, genero: "Masculino", foto: "imagenes/loqque-perfil1.jpg", pais: "México", estado: "Michoacan", ciudad: "Morelia", rankingMundial: 99, rankingLocal: 99, redes: [{ nombre: "Instagram", usuario: "@loqquue", url: "https://www.instagram.com/loqquue/" }], historia: [], videos: [], colaboraciones: [], imagenes: [], proyectos: [] },
             { id: "b16", nombre: "Vanessa Power Kujawiak", estilo: "Estilo de Baile", edad: 0, genero: "—", foto: "imagenes/vanessa-power-perfil1.jpg", pais: "México", estado: "", ciudad: "", rankingMundial: 99, rankingLocal: 99, redes: [{ nombre: "Instagram", usuario: "@vanessa_power_kujawiak", url: "https://www.instagram.com/vanessa_power_kujawiak/" }], historia: [], videos: [], colaboraciones: [], imagenes: [], proyectos: [] },
-            { id: "b17", nombre: "Dyd Dance", estilo: "Hip Hop", edad: 0, genero: "—", foto: "imagenes/dyd-dance-perfil1.jpg", pais: "México", estado: "", ciudad: "", rankingMundial: 99, rankingLocal: 99, redes: [{ nombre: "Instagram", usuario: "@dyd_dance", url: "https://www.instagram.com/dyd_dance/" }], historia: [], videos: [], colaboraciones: [], imagenes: [], proyectos: [] }
+            { id: "b17", nombre: "Dyd Dance", estilo: "Hip Hop", edad: 0, genero: "—", foto: "imagenes/dyd-dance-perfil1.jpg", pais: "México", estado: "", ciudad: "", rankingMundial: 99, rankingLocal: 99, redes: [{ nombre: "Instagram", usuario: "@dyd_dance", url: "https://www.instagram.com/dyd_dance/" }], historia: [], videos: [], colaboraciones: [], imagenes: [], proyectos: [] },
+            { id: "b18", nombre: "Skyzon RC", estilo: "Estilo de Baile", edad: 0, genero: "Masculino", foto: "imagenes/skyzon-rc-perfil1.jpg", pais: "México", estado: "", ciudad: "", rankingMundial: 99, rankingLocal: 99, redes: [{ nombre: "Instagram", usuario: "@skyzon_rc", url: "https://www.instagram.com/skyzon_rc/" }], historia: [], videos: [], colaboraciones: [], imagenes: [], proyectos: [] },
+            { id: "b19", nombre: "Bbchrzo", estilo: "Breakdance", edad: 0, genero: "Masculino", foto: "imagenes/bbchrzo-perfil1.jpg", pais: "México", estado: "Michoacan", ciudad: "Morelia", rankingMundial: 99, rankingLocal: 99, redes: [{ nombre: "Instagram", usuario: "@bbchriso", url: "https://www.instagram.com/bbchriso/" }], historia: [], videos: [], colaboraciones: [], imagenes: [], proyectos: [] },
+            { id: "b20", nombre: "Daiko", estilo: "Estilo de Baile", edad: 30, genero: "Masculino", foto: "imagenes/daiko-perfil1.jpg", pais: "México", estado: "Michoacan", ciudad: "Morelia", rankingMundial: 99, rankingLocal: 99, redes: [{ nombre: "Instagram", usuario: "@oscar_garcia_m", url: "https://www.instagram.com/oscar_garcia_m/" }], historia: [], videos: [], colaboraciones: [], imagenes: [], proyectos: [] },
+            { id: "b21", nombre: "Mapache del Hak Dak", estilo: "Estilo de Baile", edad: 0, genero: "Masculino", foto: "imagenes/mapache-del-hak-dak-perfil1.jpg", pais: "México", estado: "", ciudad: "", rankingMundial: 99, rankingLocal: 99, redes: [{ nombre: "Instagram", usuario: "@mapache_del_hak_dak", url: "https://www.instagram.com/mapache_del_hak_dak/" }, { nombre: "YouTube", usuario: "@mapahak1", url: "https://www.youtube.com/@mapahak1" }, { nombre: "TikTok", usuario: "@mapahak1", url: "https://www.tiktok.com/@mapahak1" }], historia: [], videos: [], colaboraciones: [], imagenes: [], proyectos: [] },
+            { id: "b22", nombre: "Agni-Won", estilo: "Estilo de Baile", edad: 26, genero: "Masculino", foto: "imagenes/agni-won-perfil1.jpg", pais: "México", estado: "Ciudad de México", ciudad: "Coyoacán", rankingMundial: 99, rankingLocal: 99, redes: [], historia: [], videos: [], colaboraciones: [], imagenes: [], proyectos: [{ nombre: "Phaze2 Worldwide", descripcion: "Coloca aquí el texto descriptivo del proyecto.", url: "https://www.phaze2worldwide.org/the-crew" }] },
+            { id: "b23", nombre: "Papi Chulo 007i", estilo: "Vogue", edad: 0, genero: "—", foto: "imagenes/papi-chulo-perfil1.jpg", pais: "México", estado: "Michoacan", ciudad: "Morelia", rankingMundial: 99, rankingLocal: 99, redes: [{ nombre: "Instagram", usuario: "@papi_chulo_007i", url: "https://www.instagram.com/papi_chulo_007i/" }], historia: [], videos: [], colaboraciones: [], imagenes: [], proyectos: [] },
+            { id: "b24", nombre: "Perfil 22", estilo: "Estilo de Baile", edad: 0, genero: "—", foto: "", pais: "México", estado: "", ciudad: "", rankingMundial: 99, rankingLocal: 99, redes: [], historia: [], videos: [], colaboraciones: [], imagenes: [], proyectos: [] },
+            { id: "b25", nombre: "Perfil 23", estilo: "Estilo de Baile", edad: 0, genero: "—", foto: "", pais: "México", estado: "", ciudad: "", rankingMundial: 99, rankingLocal: 99, redes: [], historia: [], videos: [], colaboraciones: [], imagenes: [], proyectos: [] },
+            { id: "b26", nombre: "Perfil 24", estilo: "Estilo de Baile", edad: 0, genero: "—", foto: "", pais: "México", estado: "", ciudad: "", rankingMundial: 99, rankingLocal: 99, redes: [], historia: [], videos: [], colaboraciones: [], imagenes: [], proyectos: [] },
+            { id: "b27", nombre: "Perfil 25", estilo: "Estilo de Baile", edad: 0, genero: "—", foto: "", pais: "México", estado: "", ciudad: "", rankingMundial: 99, rankingLocal: 99, redes: [], historia: [], videos: [], colaboraciones: [], imagenes: [], proyectos: [] }
         ];
 
         const publicaciones = [
@@ -836,7 +855,7 @@
                             <span class="etiqueta-ranking">🌍 Global: #${b.rankingMundial}</span>
                             <span class="etiqueta-ranking local">📍 Local: #${b.rankingLocal}</span>
                         </div>
-                        <img src="${b.foto}" alt="${b.nombre}" class="foto-bailarin" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'240\' height=\'240\'%3E%3Crect width=\'240\' height=\'240\' fill=\'%23202020\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' dominant-baseline=\'middle\' text-anchor=\'middle\' font-size=\'60\' fill=\'%23444\'%3E%3F%3C/text%3E%3C/svg%3E'">
+                        <img src="${fotoOFallback(b.foto)}" alt="${b.nombre}" class="foto-bailarin" onerror="this.onerror=null;this.src=SVG_PLACEHOLDER_GRANDE;">
                     </div>
                     <div class="info-tarjeta-bailarin">
                         <h3>${b.nombre}</h3>
@@ -886,7 +905,7 @@
             if (!b) return;
             idArtistaSeleccionadoActivo = idBailarin;
 
-            const svgFallback = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='290' height='300'%3E%3Crect width='290' height='300' fill='%23202020'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-size='80' fill='%23444'%3E%3F%3C/text%3E%3C/svg%3E";
+            const svgFallback = SVG_PLACEHOLDER_MODAL;
             const modalFoto = document.getElementById("modalFoto");
             modalFoto.src = b.foto || svgFallback;
             modalFoto.onerror = function() { this.onerror=null; this.src=svgFallback; };
@@ -961,6 +980,7 @@
                         <div class="tarjeta-proyecto-blog" style="margin-bottom:15px;">
                             <h3>${pro.nombre}</h3>
                             <p>${pro.descripcion}</p>
+                            ${pro.url ? `<a href="${pro.url}" target="_blank" class="btn-ver-video" style="display:inline-flex;align-items:center;gap:8px;margin-top:8px;"><i class="fa-solid fa-arrow-up-right-from-square"></i> Ver proyecto</a>` : ""}
                             ${bloqueRedesProyectoHtml}
                         </div>
                     `;
@@ -1060,7 +1080,7 @@
                     <div class="tarjeta-publicacion">
                         <div class="cabecera-publicacion">
                             <div class="perfil-creador" onclick="abrirVisorBailarin('${b.id}')">
-                                <img src="${b.foto}" alt="${b.nombre}" class="avatar-creador" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'40\' height=\'40\'%3E%3Crect width=\'40\' height=\'40\' fill=\'%23202020\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' dominant-baseline=\'middle\' text-anchor=\'middle\' font-size=\'18\' fill=\'%23444\'%3E%3F%3C/text%3E%3C/svg%3E'">
+                                <img src="${fotoOFallback(b.foto)}" alt="${b.nombre}" class="avatar-creador" onerror="this.onerror=null;this.src=SVG_PLACEHOLDER_AVATAR;">
                                 <span class="nombre-creador">${b.nombre}</span>
                             </div>
                             <span class="fecha-publicacion">${post.fecha}</span>
