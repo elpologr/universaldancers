@@ -22,56 +22,52 @@
             height: 400px;
             overflow: hidden;
             border-bottom: 4px solid #ffffff;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        .banner-slot {
+            position: relative;
+            overflow: hidden;
+            background: #111;
             cursor: pointer;
         }
 
-        .video-fondo-baile {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            min-width: 100%;
-            min-height: 100%;
-            width: auto;
-            height: auto;
-            transform: translate(-50%, -50%);
+        .banner-slot img {
+            width: 100%;
+            height: 100%;
             object-fit: cover;
-            z-index: 1;
+            transition: opacity 0.8s ease;
+        }
+
+        .banner-slot .nombre-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.75));
+            color: #fff;
+            font-size: 12px;
+            font-weight: 700;
+            text-align: center;
+            padding: 20px 6px 8px 6px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            pointer-events: none;
+        }
+
+        .banner-slot:hover .nombre-overlay {
+            opacity: 1;
         }
 
         .capa-contraste-banner {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.4);
-            z-index: 2;
+            display: none;
         }
 
         .btn-audio-baile {
-            position: absolute;
-            bottom: 25px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(255, 255, 255, 0.15);
-            color: #ffffff;
-            border: 1px solid rgba(255, 255, 255, 0.4);
-            padding: 10px 20px;
-            border-radius: 30px;
-            cursor: pointer;
-            font-size: 11px;
-            font-weight: bold;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            z-index: 10;
-            backdrop-filter: blur(5px);
-            transition: all 0.3s ease;
-        }
-
-        .btn-audio-baile:hover {
-            background: #ffffff;
-            color: #0b0b0b;
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+            display: none;
         }
 
         /* --- SECCIÓN PRINCIPAL: IDENTIDAD --- */
@@ -655,12 +651,23 @@
 </head>
 <body>
 
-    <div class="banner-baile-contenedor" onclick="abrirVideoOriginal(event)">
-        <video id="videoBaile" class="video-fondo-baile" autoplay muted loop playsinline>
-            <source src="videos/banner-baile.mp4" type="video/mp4">
-        </video>
-        <div class="capa-contraste-banner"></div>
-        <button id="btnAudio" class="btn-audio-baile">🔇 Sin Sonido</button>
+    <div class="banner-baile-contenedor" id="bannerFotos">
+        <div class="banner-slot" id="bannerSlot0" onclick="abrirVisorDesdeBanner(0)">
+            <img id="bannerImg0" src="" alt="">
+            <div class="nombre-overlay" id="bannerNombre0"></div>
+        </div>
+        <div class="banner-slot" id="bannerSlot1" onclick="abrirVisorDesdeBanner(1)">
+            <img id="bannerImg1" src="" alt="">
+            <div class="nombre-overlay" id="bannerNombre1"></div>
+        </div>
+        <div class="banner-slot" id="bannerSlot2" onclick="abrirVisorDesdeBanner(2)">
+            <img id="bannerImg2" src="" alt="">
+            <div class="nombre-overlay" id="bannerNombre2"></div>
+        </div>
+        <div class="banner-slot" id="bannerSlot3" onclick="abrirVisorDesdeBanner(3)">
+            <img id="bannerImg3" src="" alt="">
+            <div class="nombre-overlay" id="bannerNombre3"></div>
+        </div>
     </div>
 
     <section class="seccion-identidad">
@@ -672,6 +679,13 @@
         <a href="https://youtube.com" target="_blank" class="btn-red-social">▶️ YouTube</a>
         <a href="https://facebook.com" target="_blank" class="btn-red-social">👤 Facebook</a>
         <a href="https://www.instagram.com/universaldancersmx_/" target="_blank" class="btn-red-social">📸 Instagram</a>
+    </div>
+
+    <div style="max-width:900px;margin:0 auto 16px auto;padding:0 20px;">
+        <p style="margin:0;font-size:12px;color:#555;text-align:center;border:1px solid #1e1e1e;border-radius:8px;padding:10px 18px;background:#0f0f0f;letter-spacing:0.3px;">
+            <i class="fa-solid fa-shield-halved" style="color:#cd8433;margin-right:7px;"></i>
+            Cualquier bailarín puede pedir ser removido de la plataforma con solo solicitarlo — sin necesidad de dar explicaciones.
+        </p>
     </div>
 
     <div class="seccion-filtros-global">
@@ -691,9 +705,21 @@
         </div>
     </div>
 
-    <div class="contenedor-filtros">
+    <!-- BUSCADOR DE BAILARINES -->
+    <div style="max-width:900px;margin:0 auto 20px auto;padding:0 20px;">
+        <div style="position:relative;">
+            <input id="inputBuscador" type="text" placeholder="🔍  Buscar bailarín por nombre..." oninput="filtrarPorNombre(this.value)"
+                style="width:100%;box-sizing:border-box;background:#121212;color:#fff;border:1px solid #282828;padding:14px 20px 14px 48px;border-radius:10px;font-size:15px;outline:none;font-family:'Segoe UI',sans-serif;transition:border-color 0.2s;"
+                onfocus="this.style.borderColor='#cd8433'" onblur="this.style.borderColor='#282828'">
+            <i class="fa-solid fa-magnifying-glass" style="position:absolute;left:18px;top:50%;transform:translateY(-50%);color:#555;font-size:14px;pointer-events:none;"></i>
+        </div>
+    </div>
+
+    <div class="contenedor-filtros" style="grid-template-columns: repeat(4,1fr);">
         <button class="btn-filtro-grande activo" onclick="cambiarPestana('bailarines')">Bailarines</button>
         <button class="btn-filtro-grande" onclick="cambiarPestana('contenido')">Contenido Publicado</button>
+        <button class="btn-filtro-grande" onclick="cambiarPestana('idolos')">⭐ Ídolos</button>
+        <button class="btn-filtro-grande" onclick="cambiarPestana('eventos')">⚔️ Eventos / Battles</button>
     </div>
 
     <section id="bloqueBailarines" class="bloque-contenido activo">
@@ -702,6 +728,34 @@
 
     <section id="bloqueContenido" class="bloque-contenido">
         <div id="contenedorFeed" class="contenedor-feed"></div>
+    </section>
+
+    <section id="bloqueIdolos" class="bloque-contenido">
+        <div style="max-width:700px; margin:0 auto 30px auto; text-align:center;">
+            <h2 style="font-family:'Impact',sans-serif; font-size:32px; letter-spacing:2px; text-transform:uppercase; margin:0 0 8px 0;">🏆 Rank de Famosos</h2>
+            <p style="color:#888; font-size:14px; margin:0;">Bailarines con más de 1 millón de seguidores — los más activos e influyentes del mundo.</p>
+        </div>
+        <div id="gridIdolos" class="grid-bailarines"></div>
+    </section>
+
+    <section id="bloqueEventos" class="bloque-contenido">
+        <div style="max-width:900px;margin:0 auto 30px auto;">
+            <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:15px;margin-bottom:24px;">
+                <div>
+                    <h2 style="font-family:'Impact',sans-serif;font-size:32px;letter-spacing:2px;text-transform:uppercase;margin:0 0 6px 0;">⚔️ Eventos & Battles</h2>
+                    <p style="color:#888;font-size:14px;margin:0;">Próximos y recientes eventos de la escena de baile urbano.</p>
+                </div>
+                <div style="display:flex;gap:10px;flex-wrap:wrap;" id="filtrosBattles">
+                    <select id="filtroPaisBattle" onchange="renderizarEventos()" style="background:#161616;color:#fff;border:1px solid #282828;padding:9px 14px;border-radius:8px;font-size:13px;cursor:pointer;">
+                        <option value="todos">🌍 Todos los países</option>
+                    </select>
+                    <select id="filtroEstiloBattle" onchange="renderizarEventos()" style="background:#161616;color:#fff;border:1px solid #282828;padding:9px 14px;border-radius:8px;font-size:13px;cursor:pointer;">
+                        <option value="todos">💃 Todos los estilos</option>
+                    </select>
+                </div>
+            </div>
+            <div id="gridEventos" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px;"></div>
+        </div>
     </section>
 
     <div id="visorModal" class="modal-visor" onclick="cerrarModalExterno(event)">
@@ -726,12 +780,16 @@
             </div>
 
             <div class="modal-detalles-derecha">
-                <div class="menu-sub-pestanas" style="grid-template-columns: repeat(5, 1fr);">
-                    <button id="btnBlogProyectos" class="btn-sub-pestana activo" onclick="cambiarSubPestana('proyectos')">Proyectos</button>
-                    <button id="btnBlogColaboraciones" class="btn-sub-pestana" onclick="cambiarSubPestana('colaboraciones')">Colaboraciones</button>
-                    <button id="btnBlogImagenes" class="btn-sub-pestana" onclick="cambiarSubPestana('imagenes')">Imágenes</button>
+                <!-- SECCIÓN MIS MEJORES VIDEOS (fija, arriba del menú) -->
+                <div id="seccionMejoresVideos" style="padding:20px 20px 0 20px; flex-shrink:0; border-bottom:1px solid #1e1e1e;">
+                    <p style="margin:0 0 12px 0; font-size:13px; font-weight:800; text-transform:uppercase; letter-spacing:2px; color:#cd8433;">🏆 Mis Mejores Videos</p>
+                    <div id="gridMejoresVideos" style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;padding-bottom:16px;"></div>
+                </div>
+                <div class="menu-sub-pestanas" style="grid-template-columns: repeat(4, 1fr);">
+                    <button id="btnBlogHistoria" class="btn-sub-pestana activo" onclick="cambiarSubPestana('historia')">Historia y Proyectos</button>
                     <button id="btnBlogVideos" class="btn-sub-pestana" onclick="cambiarSubPestana('videos')">Videos</button>
-                    <button id="btnBlogMejoresTrab" class="btn-sub-pestana" onclick="cambiarSubPestana('mejorestrabajos')">Mejores Trabajos</button>
+                    <button id="btnBlogImagenes" class="btn-sub-pestana" onclick="cambiarSubPestana('imagenes')">Imágenes</button>
+                    <button id="btnBlogEventos" class="btn-sub-pestana" onclick="cambiarSubPestana('eventos')">Eventos</button>
                 </div>
                 <div id="areaContenidoBlog" class="area-contenido-blog"></div>
             </div>
@@ -782,30 +840,63 @@
                     { nombre: "Yesos Polo Digital", descripcion: "Desarrollo y automatización de software enfocado a la difusión e impulso de comunidades artísticas globales y comerciales." }
                 ] 
             },
-            { id: "b2", nombre: "Seven Neo 777", estilo: "Jazz Funk", edad: 22, genero: "Femenino", foto: "imagenes/seven-neo-perfil1.jpg", pais: "México", estado: "Ciudad de Mexico", ciudad: "CDMX", rankingMundial: 5, rankingLocal: 2, redes: [{ nombre: "Facebook", usuario: "gokusayan.gomez", url: "https://www.facebook.com/gokusayan.gomez" }, { nombre: "Instagram", usuario: "@seven_neo_777_oficial", url: "https://www.instagram.com/seven_neo_777_oficial" }], historia: [], videos: [], colaboraciones: [], imagenes: [], proyectos: [] },
-            { id: "b7", nombre: "Joshua Cho", estilo: "Popping", edad: 20, genero: "Masculino", foto: "imagenes/joshua-cho-perfil1.jpg", pais: "México", estado: "Michoacan", ciudad: "Nuevo Urecho", rankingMundial: 8, rankingLocal: 4, redes: [], historia: [], videos: [], colaboraciones: [], imagenes: [], proyectos: [] },
+            { id: "b2", nombre: "Seven Neo 777", estilo: "Popping / Animation", edad: 22, genero: "Femenino", foto: "imagenes/seven-neo-perfil1.jpg", pais: "México", estado: "Ciudad de Mexico", ciudad: "CDMX", rankingMundial: 5, rankingLocal: 2, redes: [{ nombre: "Facebook", usuario: "gokusayan.gomez", url: "https://www.facebook.com/gokusayan.gomez" }, { nombre: "Instagram", usuario: "@seven_neo_777_oficial", url: "https://www.instagram.com/seven_neo_777_oficial" }], historia: [], videos: [], colaboraciones: [], imagenes: [], proyectos: [] },
             { id: "b3", nombre: "Polo Dubstep", estilo: "Dubstep / Animation", edad: 27, genero: "Masculino", foto: "imagenes/polo-dubstep-logo1.jpg", pais: "México", estado: "Michoacan", ciudad: "Morelia", rankingMundial: 1, rankingLocal: 1, redes: [{ nombre: "YouTube", usuario: "@polodubstep", url: "https://www.youtube.com/@polodubstep" }, { nombre: "Facebook", usuario: "PoloDubstep", url: "https://www.facebook.com/PoloDubstep" }, { nombre: "Instagram", usuario: "@_polodubstep", url: "https://www.instagram.com/_polodubstep/" }], historia: [], videos: [{ descripcion: "Freestyle session — uno de mis sets favoritos grabados en estudio. Dubstep puro.", url: "https://www.youtube.com/@polodubstep" }], colaboraciones: [], imagenes: [], proyectos: [] },
-            { id: "b4", nombre: "Chhris Barrios", estilo: "Hip Hop", edad: 25, genero: "Femenino", foto: "imagenes/chhris-barrios-perfil1.jpg", pais: "Francia", estado: "Isla de Francia", ciudad: "París", rankingMundial: 3, rankingLocal: 1, redes: [{ nombre: "Instagram", usuario: "@chhris_barrios", url: "https://www.instagram.com/chhris_barrios/" }], historia: [], videos: [], colaboraciones: [], imagenes: [], proyectos: [] },
-            { id: "b8", nombre: "Jorge Art", estilo: "Estilo de Baile", edad: 0, genero: "—", foto: "imagenes/jorge-art-perfil1.jpg", pais: "México", estado: "", ciudad: "", rankingMundial: 99, rankingLocal: 99, redes: [{ nombre: "Facebook", usuario: "jorge9941", url: "https://www.facebook.com/jorge9941" }, { nombre: "Instagram", usuario: "@jorgeartcoria", url: "https://www.instagram.com/jorgeartcoria/" }], historia: [], videos: [], colaboraciones: [], imagenes: [], proyectos: [] },
-            { id: "b9", nombre: "Elio Enai", estilo: "Estilo de Baile", edad: 0, genero: "—", foto: "imagenes/elio-enai-perfil1.jpg", pais: "México", estado: "", ciudad: "", rankingMundial: 99, rankingLocal: 99, redes: [{ nombre: "Facebook", usuario: "elio.moonwalker", url: "https://www.facebook.com/elio.moonwalker" }], historia: [], videos: [], colaboraciones: [], imagenes: [], proyectos: [] },
-            { id: "b10", nombre: "Jackson Isaac", estilo: "Estilo de Baile", edad: 0, genero: "—", foto: "imagenes/jackson-isaac-perfil1.jpg", pais: "México", estado: "", ciudad: "", rankingMundial: 99, rankingLocal: 99, redes: [], historia: [], videos: [], colaboraciones: [], imagenes: [], proyectos: [] },
-            { id: "b11", nombre: "Marquese Scott", estilo: "Estilo de Baile", edad: 44, genero: "—", foto: "imagenes/marquese-scott-perfil1.jpg", pais: "México", estado: "", ciudad: "", rankingMundial: 99, rankingLocal: 99, redes: [{ nombre: "YouTube", usuario: "@WHZGUD2", url: "https://www.youtube.com/@WHZGUD2" }, { nombre: "Instagram", usuario: "@nonstop12", url: "https://www.instagram.com/nonstop12/" }, { nombre: "Facebook", usuario: "marquese.scott.2025", url: "https://www.facebook.com/marquese.scott.2025" }], historia: [], videos: [], colaboraciones: [], imagenes: [], proyectos: [], mejoresTrabajosHTML: [{ titulo: "Página en Wikipedia", url: "https://en.wikipedia.org/wiki/Marquese_Scott", descripcion: "Perfil oficial en Wikipedia sobre Marquese Scott (Nonstop)." }, { titulo: "Video más viral", url: "https://www.youtube.com/watch?v=LXO-jKksQkM&t=14s&pp=ygUebWFycXVlc2Ugc2NvdHQgcHVtcGVkIHVwIGtpY2tz", descripcion: "Su video más viral en YouTube — Pumped Up Kicks." }] },
-            { id: "b12", nombre: "Alexis Dales", estilo: "Estilo de Baile", edad: 0, genero: "—", foto: "imagenes/alexis-dales-perfil1.jpg", pais: "México", estado: "", ciudad: "", rankingMundial: 99, rankingLocal: 99, redes: [{ nombre: "Facebook", usuario: "alexjisus.deles", url: "https://www.facebook.com/alexjisus.deles" }, { nombre: "Instagram", usuario: "@alexisdeles_dance", url: "https://www.instagram.com/alexisdeles_dance/" }], historia: [], videos: [], colaboraciones: [], imagenes: [], proyectos: [] },
-            { id: "b13", nombre: "Thadeo Dancer", estilo: "Estilo de Baile", edad: 0, genero: "—", foto: "imagenes/thadeo-dancer-perfil1.jpg", pais: "México", estado: "", ciudad: "", rankingMundial: 99, rankingLocal: 99, redes: [], historia: [], videos: [], colaboraciones: [], imagenes: [], proyectos: [] },
-            { id: "b14", nombre: "Nikitaenc0re", estilo: "Estilo de Baile", edad: 0, genero: "—", foto: "imagenes/nikitaenc0re-perfil1.jpg", pais: "Rusia", estado: "", ciudad: "", rankingMundial: 99, rankingLocal: 99, redes: [{ nombre: "Instagram", usuario: "@nikitaenc0re", url: "https://www.instagram.com/nikitaenc0re/" }], historia: [], videos: [], colaboraciones: [], imagenes: [], proyectos: [] },
-            { id: "b15", nombre: "Loqque", estilo: "Electro / Break Dance", edad: 27, genero: "Masculino", foto: "imagenes/loqque-perfil1.jpg", pais: "México", estado: "Michoacan", ciudad: "Morelia", rankingMundial: 99, rankingLocal: 99, redes: [{ nombre: "Instagram", usuario: "@loqquue", url: "https://www.instagram.com/loqquue/" }], historia: [], videos: [], colaboraciones: [], imagenes: [], proyectos: [] },
-            { id: "b16", nombre: "Vanessa Power Kujawiak", estilo: "Estilo de Baile", edad: 0, genero: "—", foto: "imagenes/vanessa-power-perfil1.jpg", pais: "México", estado: "", ciudad: "", rankingMundial: 99, rankingLocal: 99, redes: [{ nombre: "Instagram", usuario: "@vanessa_power_kujawiak", url: "https://www.instagram.com/vanessa_power_kujawiak/" }], historia: [], videos: [], colaboraciones: [], imagenes: [], proyectos: [] },
-            { id: "b17", nombre: "Dyd Dance", estilo: "Hip Hop", edad: 0, genero: "—", foto: "imagenes/dyd-dance-perfil1.jpg", pais: "México", estado: "", ciudad: "", rankingMundial: 99, rankingLocal: 99, redes: [{ nombre: "Instagram", usuario: "@dyd_dance", url: "https://www.instagram.com/dyd_dance/" }], historia: [], videos: [], colaboraciones: [], imagenes: [], proyectos: [] },
-            { id: "b18", nombre: "Skyzon RC", estilo: "Estilo de Baile", edad: 0, genero: "Masculino", foto: "imagenes/skyzon-rc-perfil1.jpg", pais: "México", estado: "", ciudad: "", rankingMundial: 99, rankingLocal: 99, redes: [{ nombre: "Instagram", usuario: "@skyzon_rc", url: "https://www.instagram.com/skyzon_rc/" }], historia: [], videos: [], colaboraciones: [], imagenes: [], proyectos: [] },
-            { id: "b19", nombre: "Bbchrzo", estilo: "Breakdance", edad: 0, genero: "Masculino", foto: "imagenes/bbchrzo-perfil1.jpg", pais: "México", estado: "Michoacan", ciudad: "Morelia", rankingMundial: 99, rankingLocal: 99, redes: [{ nombre: "Instagram", usuario: "@bbchriso", url: "https://www.instagram.com/bbchriso/" }], historia: [], videos: [], colaboraciones: [], imagenes: [], proyectos: [] },
-            { id: "b20", nombre: "Daiko", estilo: "Estilo de Baile", edad: 30, genero: "Masculino", foto: "imagenes/daiko-perfil1.jpg", pais: "México", estado: "Michoacan", ciudad: "Morelia", rankingMundial: 99, rankingLocal: 99, redes: [{ nombre: "Instagram", usuario: "@oscar_garcia_m", url: "https://www.instagram.com/oscar_garcia_m/" }], historia: [], videos: [], colaboraciones: [], imagenes: [], proyectos: [] },
-            { id: "b21", nombre: "Mapache del Hak Dak", estilo: "Estilo de Baile", edad: 0, genero: "Masculino", foto: "imagenes/mapache-del-hak-dak-perfil1.jpg", pais: "México", estado: "", ciudad: "", rankingMundial: 99, rankingLocal: 99, redes: [{ nombre: "Instagram", usuario: "@mapache_del_hak_dak", url: "https://www.instagram.com/mapache_del_hak_dak/" }, { nombre: "YouTube", usuario: "@mapahak1", url: "https://www.youtube.com/@mapahak1" }, { nombre: "TikTok", usuario: "@mapahak1", url: "https://www.tiktok.com/@mapahak1" }], historia: [], videos: [], colaboraciones: [], imagenes: [], proyectos: [] },
-            { id: "b22", nombre: "Agni-Won", estilo: "Estilo de Baile", edad: 26, genero: "Masculino", foto: "imagenes/agni-won-perfil1.jpg", pais: "México", estado: "Ciudad de México", ciudad: "Coyoacán", rankingMundial: 99, rankingLocal: 99, redes: [], historia: [], videos: [], colaboraciones: [], imagenes: [], proyectos: [{ nombre: "Phaze2 Worldwide", descripcion: "Coloca aquí el texto descriptivo del proyecto.", url: "https://www.phaze2worldwide.org/the-crew" }] },
-            { id: "b23", nombre: "Papi Chulo 007i", estilo: "Vogue", edad: 0, genero: "—", foto: "imagenes/papi-chulo-perfil1.jpg", pais: "México", estado: "Michoacan", ciudad: "Morelia", rankingMundial: 99, rankingLocal: 99, redes: [{ nombre: "Instagram", usuario: "@papi_chulo_007i", url: "https://www.instagram.com/papi_chulo_007i/" }], historia: [], videos: [], colaboraciones: [], imagenes: [], proyectos: [] },
-            { id: "b24", nombre: "Perfil 22", estilo: "Estilo de Baile", edad: 0, genero: "—", foto: "", pais: "México", estado: "", ciudad: "", rankingMundial: 99, rankingLocal: 99, redes: [], historia: [], videos: [], colaboraciones: [], imagenes: [], proyectos: [] },
-            { id: "b25", nombre: "Perfil 23", estilo: "Estilo de Baile", edad: 0, genero: "—", foto: "", pais: "México", estado: "", ciudad: "", rankingMundial: 99, rankingLocal: 99, redes: [], historia: [], videos: [], colaboraciones: [], imagenes: [], proyectos: [] },
-            { id: "b26", nombre: "Perfil 24", estilo: "Estilo de Baile", edad: 0, genero: "—", foto: "", pais: "México", estado: "", ciudad: "", rankingMundial: 99, rankingLocal: 99, redes: [], historia: [], videos: [], colaboraciones: [], imagenes: [], proyectos: [] },
-            { id: "b27", nombre: "Perfil 25", estilo: "Estilo de Baile", edad: 0, genero: "—", foto: "", pais: "México", estado: "", ciudad: "", rankingMundial: 99, rankingLocal: 99, redes: [], historia: [], videos: [], colaboraciones: [], imagenes: [], proyectos: [] }
+            { id: "b11", nombre: "Marquese Scott", estilo: "Popping / Animation", edad: 44, genero: "—", foto: "imagenes/marquese-scott-perfil1.jpg", pais: "México", estado: "", ciudad: "", rankingMundial: 99, rankingLocal: 99, redes: [{ nombre: "YouTube", usuario: "@WHZGUD2", url: "https://www.youtube.com/@WHZGUD2" }, { nombre: "Instagram", usuario: "@nonstop12", url: "https://www.instagram.com/nonstop12/" }, { nombre: "Facebook", usuario: "marquese.scott.2025", url: "https://www.facebook.com/marquese.scott.2025" }], historia: [], videos: [], colaboraciones: [], imagenes: [], proyectos: [], mejoresTrabajosHTML: [{ titulo: "Página en Wikipedia", url: "https://en.wikipedia.org/wiki/Marquese_Scott", descripcion: "Perfil oficial en Wikipedia sobre Marquese Scott (Nonstop)." }, { titulo: "Video más viral", url: "https://www.youtube.com/watch?v=LXO-jKksQkM&t=14s&pp=ygUebWFycXVlc2Ugc2NvdHQgcHVtcGVkIHVwIGtpY2tz", descripcion: "Su video más viral en YouTube — Pumped Up Kicks." }] },
+            { id: "b24", nombre: "HammerSound0.0", estilo: "Popping / Animation", edad: 0, genero: "Masculino", foto: "imagenes/hammer-perfil1.jpg", pais: "México", estado: "", ciudad: "México", rankingMundial: 99, rankingLocal: 99, redes: [{ nombre: "Instagram", usuario: "@hamersound0.0", url: "https://www.instagram.com/hamersound0.0/" }], historia: [], videos: [], colaboraciones: [], imagenes: [], proyectos: [] },
+            { id: "b30", nombre: "Fik Shun", estilo: "Popping / Animation / Hip Hop / Espada", edad: 31, genero: "Masculino", foto: "imagenes/fik-shun-perfil1.jpg", pais: "EE.UU", estado: "Kansas", ciudad: "Wichita", rankingMundial: 99, rankingLocal: 99, redes: [{ nombre: "Instagram", usuario: "@dance10fikshun", url: "https://www.instagram.com/dance10fikshun/?hl=es" }, { nombre: "YouTube", usuario: "Fik Shun", url: "https://www.youtube.com/channel/UC_aQU22h4h3v2ZgNUW6MN4w" }, { nombre: "Facebook", usuario: "Fikshunstega", url: "https://www.facebook.com/Fikshunstega/" }], historia: [], videos: [], colaboraciones: [], imagenes: [], proyectos: [] },
+            { id: "b31", nombre: "Ditto", estilo: "Popping / Tutting / Tutting Finger", edad: 28, genero: "Femenino", foto: "imagenes/ditto-perfil1.jpg", pais: "EE.UU", estado: "", ciudad: "", rankingMundial: 99, rankingLocal: 99, redes: [{ nombre: "Instagram", usuario: "@IAm_Dytto", url: "https://www.instagram.com/IAm_Dytto/" }, { nombre: "Facebook", usuario: "iamdytto", url: "https://www.facebook.com/iamdytto/" }], historia: [], videos: [], colaboraciones: [], imagenes: [], proyectos: [] },
+        ];
+
+        const eventos = [
+            {
+                id: "ev1",
+                nombre: "Popping Battle MX 2026",
+                tipo: "Battle 1vs1",
+                estilo: "Popping",
+                fecha: "2026-06-15",
+                pais: "México",
+                estado: "Michoacan",
+                ciudad: "Morelia",
+                lugar: "Centro Cultural Universitario",
+                descripcion: "Battle de Popping abierto a toda la comunidad. Categorías: principiante y abierto. Premio para el ganador.",
+                imagen: "",
+                url: "",
+                organizador: "Universal Dancers MX",
+                estado_evento: "próximo"
+            },
+            {
+                id: "ev2",
+                nombre: "Street Jam CDMX",
+                tipo: "Jam / Freestyle",
+                estilo: "Hip Hop / Popping / Breaking",
+                fecha: "2026-07-04",
+                pais: "México",
+                estado: "Ciudad de México",
+                ciudad: "CDMX",
+                lugar: "Plaza de la Constitución",
+                descripcion: "Evento abierto de freestyle urbano en el corazón de la ciudad. Sin registro, solo llega y baila.",
+                imagen: "",
+                url: "",
+                organizador: "",
+                estado_evento: "próximo"
+            },
+            {
+                id: "ev3",
+                nombre: "Animation Gathering Japan 2026",
+                tipo: "Gathering / Battle",
+                estilo: "Animation / Popping",
+                fecha: "2026-08-20",
+                pais: "Japón",
+                estado: "",
+                ciudad: "Tokio",
+                lugar: "Shibuya Cultural Hall",
+                descripcion: "Encuentro internacional de animadores y poppers. Uno de los eventos más importantes de Asia.",
+                imagen: "",
+                url: "",
+                organizador: "",
+                estado_evento: "próximo"
+            }
         ];
 
         const publicaciones = [
@@ -818,9 +909,16 @@
         let ciudadFiltroActual = "todas";
 
         document.addEventListener("DOMContentLoaded", () => {
+            // Asegurar que todos los perfiles tengan los campos nuevos
+            bailarines.forEach(b => {
+                if (!b.videoImprovisado) b.videoImprovisado = [];
+                if (!b.eventos) b.eventos = [];
+                if (!b.mejoresTrabajosHTML) b.mejoresTrabajosHTML = [];
+            });
             inicializarSelectoresInteligentes();
             renderizarBailarines();
             renderizarFeed();
+            inicializarBanner();
         });
 
         function inicializarSelectoresInteligentes() {
@@ -938,136 +1036,305 @@
                 });
             }
 
-            cambiarSubPestana('proyectos');
+            cambiarSubPestana('historia');
+            cargarMejoresVideos(b);
             document.getElementById("visorModal").style.display = "flex";
             if (window.innerWidth > 750) document.body.style.overflow = "hidden";
         }
 
         function cambiarSubPestana(seccion) {
-            document.getElementById("btnBlogProyectos").classList.remove("activo");
-            document.getElementById("btnBlogColaboraciones").classList.remove("activo");
-            document.getElementById("btnBlogImagenes").classList.remove("activo");
-            document.getElementById("btnBlogVideos").classList.remove("activo");
-            document.getElementById("btnBlogMejoresTrab").classList.remove("activo");
-            if (seccion === 'proyectos') document.getElementById("btnBlogProyectos").classList.add("activo");
-            if (seccion === 'colaboraciones') document.getElementById("btnBlogColaboraciones").classList.add("activo");
-            if (seccion === 'imagenes') document.getElementById("btnBlogImagenes").classList.add("activo");
-            if (seccion === 'videos') document.getElementById("btnBlogVideos").classList.add("activo");
-            if (seccion === 'mejorestrabajos') document.getElementById("btnBlogMejoresTrab").classList.add("activo");
+            ["btnBlogHistoria","btnBlogVideos","btnBlogImagenes","btnBlogEventos"].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.classList.remove("activo");
+            });
+            const mapa = { historia:"btnBlogHistoria", videos:"btnBlogVideos", imagenes:"btnBlogImagenes", eventos:"btnBlogEventos" };
+            if (mapa[seccion]) document.getElementById(mapa[seccion]).classList.add("activo");
 
             const areaContenido = document.getElementById("areaContenidoBlog");
-            const b = bailarines.find(item => item.id === idArtistaSeleccionadoActivo);
+            const b = bailarines.concat(idolos).find(item => item.id === idArtistaSeleccionadoActivo);
             areaContenido.innerHTML = "";
             if (!b) return;
 
-            if (seccion === 'proyectos') {
-                if (!b.proyectos || b.proyectos.length === 0) {
-                    areaContenido.innerHTML = `<p style="color:#666; font-style:italic;">No hay proyectos documentados.</p>`;
-                    return;
+            if (seccion === 'historia') {
+                // Historia
+                if (b.historia && b.historia.length > 0) {
+                    b.historia.forEach(seg => {
+                        areaContenido.innerHTML += `
+                            <div class="segmento-historia" style="margin-bottom:20px;">
+                                ${seg.imagen ? `<img src="${seg.imagen}" alt="${seg.titulo}" style="width:100%;border-radius:8px;margin-bottom:10px;max-height:200px;object-fit:cover;" onerror="this.style.display='none'">` : ""}
+                                <h3>${seg.titulo}</h3><p>${seg.texto}</p>
+                            </div>`;
+                    });
+                } else {
+                    areaContenido.innerHTML += `<p style="color:#666;font-style:italic;">No hay historia documentada.</p>`;
                 }
-                b.proyectos.forEach(pro => {
-                    let bloqueRedesProyectoHtml = "";
-                    if (pro.nombre === "Universal Dancers MX" && b.id === "b1") {
-                        bloqueRedesProyectoHtml = `
-                            <div class="bloque-redes-proyecto">
-                                <a href="https://youtube.com/@polodubstep" target="_blank" class="btn-proyecto-red" style="background: #ff0000;"><i class="fa-brands fa-youtube"></i> YouTube</a>
-                                <a href="https://facebook.com" target="_blank" class="btn-proyecto-red" style="background: #1877f2;"><i class="fa-brands fa-facebook-f"></i> Facebook</a>
-                                <a href="https://www.instagram.com/universaldancersmx_/" target="_blank" class="btn-proyecto-red" style="background: #e1306c;"><i class="fa-brands fa-instagram"></i> Instagram</a>
-                            </div>
-                        `;
-                    }
-                    areaContenido.innerHTML += `
-                        <div class="tarjeta-proyecto-blog" style="margin-bottom:15px;">
-                            <h3>${pro.nombre}</h3>
-                            <p>${pro.descripcion}</p>
-                            ${pro.url ? `<a href="${pro.url}" target="_blank" class="btn-ver-video" style="display:inline-flex;align-items:center;gap:8px;margin-top:8px;"><i class="fa-solid fa-arrow-up-right-from-square"></i> Ver proyecto</a>` : ""}
-                            ${bloqueRedesProyectoHtml}
-                        </div>
-                    `;
-                });
-            }
-
-            if (seccion === 'colaboraciones') {
-                if (!b.colaboraciones || b.colaboraciones.length === 0) {
-                    areaContenido.innerHTML = `<p style="color:#666; font-style:italic;">No hay colaboraciones registradas.</p>`;
-                    return;
+                // Proyectos
+                if (b.proyectos && b.proyectos.length > 0) {
+                    areaContenido.innerHTML += `<h3 style="font-size:15px;text-transform:uppercase;letter-spacing:1px;color:#cd8433;margin:24px 0 12px 0;border-top:1px solid #222;padding-top:20px;">Proyectos</h3>`;
+                    b.proyectos.forEach(pro => {
+                        let bloqueRedesProyectoHtml = "";
+                        if (pro.nombre === "Universal Dancers MX" && b.id === "b1") {
+                            bloqueRedesProyectoHtml = `<div class="bloque-redes-proyecto">
+                                <a href="https://youtube.com/@polodubstep" target="_blank" class="btn-proyecto-red" style="background:#ff0000;"><i class="fa-brands fa-youtube"></i> YouTube</a>
+                                <a href="https://facebook.com" target="_blank" class="btn-proyecto-red" style="background:#1877f2;"><i class="fa-brands fa-facebook-f"></i> Facebook</a>
+                                <a href="https://www.instagram.com/universaldancersmx_/" target="_blank" class="btn-proyecto-red" style="background:#e1306c;"><i class="fa-brands fa-instagram"></i> Instagram</a>
+                            </div>`;
+                        }
+                        areaContenido.innerHTML += `
+                            <div class="tarjeta-proyecto-blog" style="margin-bottom:15px;">
+                                <h3>${pro.nombre}</h3>
+                                <p>${pro.descripcion}</p>
+                                ${pro.url ? `<a href="${pro.url}" target="_blank" class="btn-ver-video" style="display:inline-flex;align-items:center;gap:8px;margin-top:8px;"><i class="fa-solid fa-arrow-up-right-from-square"></i> Ver proyecto</a>` : ""}
+                                ${bloqueRedesProyectoHtml}
+                            </div>`;
+                    });
                 }
-                b.colaboraciones.forEach(col => {
-                    areaContenido.innerHTML += `
-                        <div class="tarjeta-proyecto-blog" style="margin-bottom:15px;">
-                            <h3>${col.nombre}</h3>
-                            <p>${col.descripcion}</p>
-                        </div>
-                    `;
-                });
-            }
-
-            if (seccion === 'imagenes') {
-                if (!b.imagenes || b.imagenes.length === 0) {
-                    areaContenido.innerHTML = `<p style="color:#666; font-style:italic;">No hay imágenes publicadas.</p>`;
-                    return;
-                }
-                const grid = document.createElement("div");
-                grid.style.cssText = "display:grid; grid-template-columns: repeat(2,1fr); gap:10px;";
-                b.imagenes.forEach(img => {
-                    grid.innerHTML += `
-                        <div style="border-radius:8px; overflow:hidden; background:#161616; border:1px solid #222;">
-                            <img src="${img.src}" alt="${img.descripcion}" style="width:100%; height:140px; object-fit:cover; display:block;" onerror="this.style.display='none'">
-                            <p style="margin:0; padding:8px 10px; font-size:12px; color:#888;">${img.descripcion}</p>
-                        </div>
-                    `;
-                });
-                areaContenido.appendChild(grid);
+                return;
             }
 
             if (seccion === 'videos') {
-                if (!b.videos || b.videos.length === 0) {
-                    areaContenido.innerHTML = `<p style="color:#666; font-style:italic;">No hay videos destacados.</p>`;
-                    return;
-                }
-                b.videos.forEach(vid => {
-                    areaContenido.innerHTML += `
-                        <div class="tarjeta-video-blog">
-                            <p class="video-descripcion">${vid.descripcion}</p>
-                            <a href="${vid.url}" target="_blank" class="btn-ver-video">
-                                <i class="fa-brands fa-youtube"></i> Ver video
-                            </a>
-                        </div>
-                    `;
-                });
+                areaContenido.innerHTML = `
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:24px;">
+                        <button onclick="seleccionarCategoriaVideo('profesional')" id="btnCatPro"
+                            style="background:#cd8433;color:#fff;border:2px solid #cd8433;border-radius:10px;padding:18px;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:1px;cursor:pointer;transition:all 0.2s;">
+                            🎬 Videos Profesionales
+                        </button>
+                        <button onclick="seleccionarCategoriaVideo('improvisado')" id="btnCatImp"
+                            style="background:#1a1a1a;color:#888;border:2px solid #222;border-radius:10px;padding:18px;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:1px;cursor:pointer;transition:all 0.2s;">
+                            🕺 Baile Improvisado
+                        </button>
+                    </div>
+                    <div id="subBotonesVideo" style="display:flex;gap:8px;margin-bottom:16px;"></div>
+                    <div id="subAreaVideos"></div>
+                `;
+                seleccionarCategoriaVideo('profesional');
+                return;
             }
 
-            if (seccion === 'mejorestrabajos') {
-                if (!b.mejoresTrabajosHTML || b.mejoresTrabajosHTML.length === 0) {
-                    areaContenido.innerHTML = `<p style="color:#666; font-style:italic;">No hay trabajos destacados registrados.</p>`;
-                    return;
-                }
-                b.mejoresTrabajosHTML.forEach(trabajo => {
+            if (seccion === 'imagenes') {
+                if (!b.imagenes || b.imagenes.length === 0) { areaContenido.innerHTML = `<p style="color:#666;font-style:italic;">No hay imágenes publicadas.</p>`; return; }
+                const grid = document.createElement("div");
+                grid.style.cssText = "display:grid;grid-template-columns:repeat(2,1fr);gap:10px;";
+                b.imagenes.forEach(img => {
+                    grid.innerHTML += `<div style="border-radius:8px;overflow:hidden;background:#161616;border:1px solid #222;">
+                        <img src="${img.src}" alt="${img.descripcion}" style="width:100%;height:140px;object-fit:cover;display:block;" onerror="this.style.display='none'">
+                        <p style="margin:0;padding:8px 10px;font-size:12px;color:#888;">${img.descripcion}</p>
+                    </div>`;
+                });
+                areaContenido.appendChild(grid);
+                return;
+            }
+
+            if (seccion === 'eventos') {
+                if (!b.eventos || b.eventos.length === 0) { areaContenido.innerHTML = `<p style="color:#666;font-style:italic;">No hay eventos registrados.</p>`; return; }
+                b.eventos.forEach(ev => {
                     areaContenido.innerHTML += `
-                        <div class="tarjeta-proyecto-blog" style="margin-bottom:15px;">
-                            <h3>${trabajo.titulo}</h3>
-                            <p>${trabajo.descripcion}</p>
-                            <a href="${trabajo.url}" target="_blank" class="btn-ver-video" style="display:inline-flex; align-items:center; gap:8px; margin-top:8px;">
-                                <i class="fa-solid fa-arrow-up-right-from-square"></i> Ver enlace
-                            </a>
-                        </div>
-                    `;
+                        <div class="tarjeta-proyecto-blog" style="margin-bottom:20px;">
+                            ${ev.imagen ? `<img src="${ev.imagen}" alt="${ev.titulo}" style="width:100%;border-radius:8px;margin-bottom:12px;max-height:200px;object-fit:cover;" onerror="this.style.display='none'">` : ""}
+                            <h3>${ev.titulo}</h3>
+                            <p style="color:#888;font-size:12px;margin:0 0 8px 0;">${ev.fecha || ""}</p>
+                            <p>${ev.descripcion}</p>
+                            ${ev.url ? `<a href="${ev.url}" target="_blank" class="btn-ver-video" style="display:inline-flex;align-items:center;gap:8px;margin-top:8px;"><i class="fa-brands fa-youtube"></i> Ver video del evento</a>` : ""}
+                        </div>`;
+                });
+                return;
+            }
+        }
+
+        function seleccionarCategoriaVideo(cat) {
+            const btnPro = document.getElementById("btnCatPro");
+            const btnImp = document.getElementById("btnCatImp");
+            const subBotones = document.getElementById("subBotonesVideo");
+            const subArea = document.getElementById("subAreaVideos");
+            if (!subBotones) return;
+
+            if (cat === 'profesional') {
+                if (btnPro) { btnPro.style.background='#cd8433'; btnPro.style.color='#fff'; btnPro.style.borderColor='#cd8433'; }
+                if (btnImp) { btnImp.style.background='#1a1a1a'; btnImp.style.color='#888'; btnImp.style.borderColor='#222'; }
+                subBotones.innerHTML = `
+                    <button onclick="mostrarSubVideos('solo')" id="btnVidSoloPro" class="btn-sub-pestana activo" style="border:1px solid #333;border-radius:6px;padding:7px 16px;font-size:12px;">Solo</button>
+                    <button onclick="mostrarSubVideos('colaboraciones')" id="btnVidColPro" class="btn-sub-pestana" style="border:1px solid #333;border-radius:6px;padding:7px 16px;font-size:12px;">Colaboraciones</button>
+                `;
+                mostrarSubVideos('solo');
+            } else {
+                if (btnImp) { btnImp.style.background='#cd8433'; btnImp.style.color='#fff'; btnImp.style.borderColor='#cd8433'; }
+                if (btnPro) { btnPro.style.background='#1a1a1a'; btnPro.style.color='#888'; btnPro.style.borderColor='#222'; }
+                subBotones.innerHTML = `
+                    <button onclick="mostrarSubImpro('solo')" id="btnImpSolo" class="btn-sub-pestana activo" style="border:1px solid #333;border-radius:6px;padding:7px 16px;font-size:12px;">Solo</button>
+                    <button onclick="mostrarSubImpro('street')" id="btnImpStreet" class="btn-sub-pestana" style="border:1px solid #333;border-radius:6px;padding:7px 16px;font-size:12px;">Street</button>
+                `;
+                mostrarSubImpro('solo');
+            }
+        }
+
+        function mostrarSubVideos(tipo) {
+            const b = bailarines.concat(idolos).find(item => item.id === idArtistaSeleccionadoActivo);
+            const subArea = document.getElementById("subAreaVideos");
+            if (!subArea || !b) return;
+            ["btnVidSoloPro","btnVidColPro"].forEach(id => { const el = document.getElementById(id); if(el) el.classList.remove("activo"); });
+            subArea.innerHTML = "";
+            if (tipo === 'solo') {
+                if (document.getElementById("btnVidSoloPro")) document.getElementById("btnVidSoloPro").classList.add("activo");
+                const lista = (b.videos || []).filter(v => !v.esColaboracion);
+                if (lista.length === 0) { subArea.innerHTML = `<p style="color:#666;font-style:italic;">No hay videos solo profesionales.</p>`; return; }
+                lista.forEach(vid => {
+                    subArea.innerHTML += `<div class="tarjeta-video-blog"><p class="video-descripcion">${vid.descripcion}</p><a href="${vid.url}" target="_blank" class="btn-ver-video"><i class="fa-brands fa-youtube"></i> Ver video</a></div>`;
+                });
+            } else {
+                if (document.getElementById("btnVidColPro")) document.getElementById("btnVidColPro").classList.add("activo");
+                const lista = (b.videos || []).filter(v => v.esColaboracion).concat(b.colaboraciones || []);
+                if (lista.length === 0) { subArea.innerHTML = `<p style="color:#666;font-style:italic;">No hay colaboraciones registradas.</p>`; return; }
+                lista.forEach(item => {
+                    subArea.innerHTML += `<div class="tarjeta-video-blog"><p class="video-descripcion">${item.descripcion || item.nombre || ""}</p>${item.url ? `<a href="${item.url}" target="_blank" class="btn-ver-video"><i class="fa-brands fa-youtube"></i> Ver video</a>` : ""}</div>`;
                 });
             }
         }
 
-        function cambiarPestana(tipo) {
-            const btnBailarines = document.querySelectorAll(".btn-filtro-grande")[0];
-            const btnContenido = document.querySelectorAll(".btn-filtro-grande")[1];
-            if (tipo === 'bailarines') {
-                btnBailarines.classList.add("activo"); btnContenido.classList.remove("activo");
-                document.getElementById("bloqueBailarines").classList.add("activo");
-                document.getElementById("bloqueContenido").classList.remove("activo");
+        function mostrarSubImpro(tipo) {
+            const b = bailarines.concat(idolos).find(item => item.id === idArtistaSeleccionadoActivo);
+            const subArea = document.getElementById("subAreaImpro");
+            if (!subArea || !b) return;
+            ["btnImpSolo","btnImpStreet"].forEach(id => { const el = document.getElementById(id); if(el) el.classList.remove("activo"); });
+            subArea.innerHTML = "";
+            if (tipo === 'solo') {
+                if (document.getElementById("btnImpSolo")) document.getElementById("btnImpSolo").classList.add("activo");
+                const lista = (b.videoImprovisado || []).filter(v => !v.esStreet);
+                if (lista.length === 0) { subArea.innerHTML = `<p style="color:#666;font-style:italic;">No hay videos improvisados solo.</p>`; return; }
+                lista.forEach(vid => {
+                    subArea.innerHTML += `<div class="tarjeta-video-blog"><p class="video-descripcion">${vid.descripcion}</p><a href="${vid.url}" target="_blank" class="btn-ver-video"><i class="fa-solid fa-video"></i> Ver video</a></div>`;
+                });
             } else {
-                btnBailarines.classList.remove("activo"); btnContenido.classList.add("activo");
-                document.getElementById("bloqueBailarines").classList.remove("activo");
-                document.getElementById("bloqueContenido").classList.add("activo");
+                if (document.getElementById("btnImpStreet")) document.getElementById("btnImpStreet").classList.add("activo");
+                const lista = (b.videoImprovisado || []).filter(v => v.esStreet);
+                if (lista.length === 0) { subArea.innerHTML = `<p style="color:#666;font-style:italic;">No hay videos de street.</p>`; return; }
+                lista.forEach(vid => {
+                    subArea.innerHTML += `<div class="tarjeta-video-blog"><p class="video-descripcion">${vid.descripcion}</p><a href="${vid.url}" target="_blank" class="btn-ver-video"><i class="fa-solid fa-video"></i> Ver video</a></div>`;
+                });
             }
+        }
+
+        function cargarMejoresVideos(b) {
+            const grid = document.getElementById("gridMejoresVideos");
+            if (!grid) return;
+            grid.innerHTML = "";
+            const lista = b.mejoresVideos || [];
+            for (let i = 0; i < 5; i++) {
+                const vid = lista[i] || null;
+                if (vid && vid.url) {
+                    grid.innerHTML += `
+                        <a href="${vid.url}" target="_blank" style="display:block;text-decoration:none;border-radius:6px;overflow:hidden;border:1px solid #2a2a2a;background:#161616;transition:border-color 0.2s;" onmouseover="this.style.borderColor='#cd8433'" onmouseout="this.style.borderColor='#2a2a2a'">
+                            <div style="width:100%;aspect-ratio:16/9;background:#0d0d0d;overflow:hidden;">
+                                <img src="${vid.miniatura || ''}" alt="${vid.titulo || ''}" style="width:100%;height:100%;object-fit:cover;" onerror="this.style.display='none'">
+                            </div>
+                            <p style="margin:0;padding:5px 6px;font-size:10px;color:#aaa;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${vid.titulo || 'Ver video'}</p>
+                        </a>`;
+                } else {
+                    grid.innerHTML += `
+                        <div style="border-radius:6px;border:1px dashed #2a2a2a;background:#0d0d0d;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;">
+                            <span style="color:#333;font-size:18px;">+</span>
+                        </div>`;
+                }
+            }
+        }
+
+        function cambiarPestana(tipo) {
+            const btns = document.querySelectorAll(".btn-filtro-grande");
+            btns.forEach(b => b.classList.remove("activo"));
+            ["bloqueBailarines","bloqueContenido","bloqueIdolos","bloqueEventos"].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.classList.remove("activo");
+            });
+            if (tipo === 'bailarines') { btns[0].classList.add("activo"); document.getElementById("bloqueBailarines").classList.add("activo"); }
+            else if (tipo === 'contenido') { btns[1].classList.add("activo"); document.getElementById("bloqueContenido").classList.add("activo"); }
+            else if (tipo === 'idolos') { btns[2].classList.add("activo"); document.getElementById("bloqueIdolos").classList.add("activo"); renderizarIdolos(); }
+            else if (tipo === 'eventos') { btns[3].classList.add("activo"); document.getElementById("bloqueEventos").classList.add("activo"); renderizarEventos(); }
+        }
+
+        function filtrarPorNombre(query) {
+            const q = query.toLowerCase().trim();
+            // Cambiar a pestaña bailarines si no está activa
+            const bloque = document.getElementById("bloqueBailarines");
+            if (!bloque.classList.contains("activo")) cambiarPestana('bailarines');
+            const grid = document.getElementById("gridBailarines");
+            grid.innerHTML = "";
+            let lista = [...bailarines];
+            if (q) lista = lista.filter(b => b.nombre.toLowerCase().includes(q));
+            if (lista.length === 0) {
+                grid.innerHTML = `<p style="color:#666;font-style:italic;grid-column:1/-1;">No se encontraron bailarines con ese nombre.</p>`;
+                return;
+            }
+            lista.forEach(b => {
+                const tarjeta = document.createElement("div");
+                tarjeta.className = "tarjeta-bailarin";
+                tarjeta.onclick = () => abrirVisorBailarin(b.id);
+                tarjeta.innerHTML = `
+                    <div class="contenedor-foto">
+                        <div class="contenedor-etiquetas-rank">
+                            <span class="etiqueta-ranking">🌍 Global: #${b.rankingMundial}</span>
+                            <span class="etiqueta-ranking local">📍 Local: #${b.rankingLocal}</span>
+                        </div>
+                        <img src="${fotoOFallback(b.foto)}" alt="${b.nombre}" class="foto-bailarin" onerror="this.onerror=null;this.src=SVG_PLACEHOLDER_GRANDE;">
+                    </div>
+                    <div class="info-tarjeta-bailarin">
+                        <h3>${b.nombre}</h3>
+                        <p>${b.estilo}</p>
+                        <span class="badge-ubicacion-tarjeta">📍 ${b.ciudad || b.pais}</span>
+                    </div>
+                `;
+                grid.appendChild(tarjeta);
+            });
+        }
+
+        function renderizarEventos() {
+            const grid = document.getElementById("gridEventos");
+            if (!grid) return;
+
+            const filtroPais = document.getElementById("filtroPaisBattle").value;
+            const filtroEstilo = document.getElementById("filtroEstiloBattle").value;
+
+            // Poblar filtros únicos
+            const paises = [...new Set(eventos.map(e => e.pais))].sort();
+            const estilos = [...new Set(eventos.map(e => e.estilo))].sort();
+            const selectPais = document.getElementById("filtroPaisBattle");
+            const selectEstilo = document.getElementById("filtroEstiloBattle");
+            selectPais.innerHTML = `<option value="todos">🌍 Todos los países</option>` + paises.map(p => `<option value="${p}" ${filtroPais===p?'selected':''}>${p}</option>`).join('');
+            selectEstilo.innerHTML = `<option value="todos">💃 Todos los estilos</option>` + estilos.map(e => `<option value="${e}" ${filtroEstilo===e?'selected':''}>${e}</option>`).join('');
+
+            let lista = [...eventos];
+            if (filtroPais !== "todos") lista = lista.filter(e => e.pais === filtroPais);
+            if (filtroEstilo !== "todos") lista = lista.filter(e => e.estilo === filtroEstilo);
+            lista.sort((a,b) => a.fecha.localeCompare(b.fecha));
+
+            grid.innerHTML = "";
+            if (lista.length === 0) {
+                grid.innerHTML = `<p style="color:#666;font-style:italic;grid-column:1/-1;">No hay eventos con esos filtros.</p>`;
+                return;
+            }
+
+            lista.forEach(ev => {
+                const fecha = ev.fecha ? new Date(ev.fecha + 'T00:00:00').toLocaleDateString('es-MX', { day:'numeric', month:'long', year:'numeric' }) : "Fecha por confirmar";
+                const badgeColor = ev.estado_evento === 'próximo' ? '#2a6e3f' : ev.estado_evento === 'pasado' ? '#444' : '#5a3a00';
+                const badgeTexto = ev.estado_evento === 'próximo' ? '🟢 Próximo' : ev.estado_evento === 'pasado' ? '⚫ Pasado' : '🟡 En curso';
+                const ubicacion = [ev.ciudad, ev.estado, ev.pais].filter(Boolean).join(', ');
+                grid.innerHTML += `
+                    <div style="background:#121212;border:1px solid #1e1e1e;border-radius:12px;overflow:hidden;transition:border-color 0.2s,transform 0.2s;" onmouseover="this.style.borderColor='#cd8433';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='#1e1e1e';this.style.transform='translateY(0)'">
+                        ${ev.imagen ? `<img src="${ev.imagen}" alt="${ev.nombre}" style="width:100%;height:160px;object-fit:cover;display:block;" onerror="this.style.display='none'">` : `<div style="width:100%;height:120px;background:linear-gradient(135deg,#1a1a1a,#0d0d0d);display:flex;align-items:center;justify-content:center;font-size:40px;">⚔️</div>`}
+                        <div style="padding:16px;">
+                            <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap;">
+                                <span style="background:${badgeColor};color:#fff;font-size:10px;font-weight:800;padding:3px 8px;border-radius:4px;text-transform:uppercase;letter-spacing:1px;">${badgeTexto}</span>
+                                <span style="background:#1e1e1e;color:#cd8433;font-size:10px;font-weight:700;padding:3px 8px;border-radius:4px;text-transform:uppercase;">${ev.tipo}</span>
+                            </div>
+                            <h3 style="margin:0 0 6px 0;font-size:17px;font-weight:800;letter-spacing:0.3px;">${ev.nombre}</h3>
+                            <p style="margin:0 0 4px 0;font-size:12px;color:#cd8433;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;">💃 ${ev.estilo}</p>
+                            <p style="margin:0 0 4px 0;font-size:12px;color:#888;">📅 ${fecha}</p>
+                            <p style="margin:0 0 4px 0;font-size:12px;color:#888;">📍 ${ubicacion}</p>
+                            ${ev.lugar ? `<p style="margin:0 0 8px 0;font-size:12px;color:#666;">🏟️ ${ev.lugar}</p>` : ''}
+                            ${ev.organizador ? `<p style="margin:0 0 8px 0;font-size:11px;color:#555;">Organiza: <span style="color:#aaa;">${ev.organizador}</span></p>` : ''}
+                            <p style="margin:0 0 12px 0;font-size:13px;line-height:1.5;color:#aaa;">${ev.descripcion}</p>
+                            ${ev.url ? `<a href="${ev.url}" target="_blank" style="display:inline-flex;align-items:center;gap:7px;background:#1e1e1e;color:#fff;text-decoration:none;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1px;padding:8px 14px;border-radius:6px;border:1px solid #333;transition:all 0.2s;" onmouseover="this.style.background='#cd8433';this.style.borderColor='#cd8433'" onmouseout="this.style.background='#1e1e1e';this.style.borderColor='#333'"><i class="fa-solid fa-arrow-up-right-from-square"></i> Más info</a>` : ''}
+                        </div>
+                    </div>`;
+            });
         }
 
         function renderizarFeed() {
@@ -1103,8 +1370,106 @@
             if (e.target === document.getElementById("visorModal")) cerrarVisor();
         }
 
-        function abrirVideoOriginal() {
-            window.open('videos/banner-baile.mp4', '_blank');
+        // --- BANNER DE FOTOS ROTATIVAS ---
+        let bannerIdsActuales = [null, null, null, null];
+
+        function inicializarBanner() {
+            actualizarBanner();
+            setInterval(actualizarBanner, 20000);
+        }
+
+        function actualizarBanner() {
+            const conFoto = bailarines.filter(b => b.foto && b.foto.trim() !== "");
+            if (conFoto.length < 4) return;
+            const mezclados = [...conFoto].sort(() => Math.random() - 0.5);
+            const seleccionados = mezclados.slice(0, 4);
+            seleccionados.forEach((b, i) => {
+                const img = document.getElementById("bannerImg" + i);
+                const nombre = document.getElementById("bannerNombre" + i);
+                bannerIdsActuales[i] = b.id;
+                img.style.opacity = 0;
+                setTimeout(() => {
+                    img.src = b.foto;
+                    img.alt = b.nombre;
+                    nombre.textContent = b.nombre;
+                    img.style.opacity = 1;
+                }, i * 150);
+            });
+        }
+
+        function abrirVisorDesdeBanner(slotIndex) {
+            const id = bannerIdsActuales[slotIndex];
+            if (id) abrirVisorBailarin(id);
+        }
+
+        // ---- SECCIÓN ÍDOLOS ----
+        const idolos = [
+            { id: "i1", nombre: "Marquese Scott", estilo: "Animation / Popping", edad: 44, genero: "Masculino", foto: "imagenes/marquese-scott-perfil1.jpg", pais: "Estados Unidos", estado: "", ciudad: "", rankFamosos: 1, seguidores: "10M+", redes: [{ nombre: "YouTube", usuario: "@WHZGUD2", url: "https://www.youtube.com/@WHZGUD2" }, { nombre: "Instagram", usuario: "@nonstop12", url: "https://www.instagram.com/nonstop12/" }], historia: [], videos: [], videoImprovisado: [], colaboraciones: [], imagenes: [], eventos: [], proyectos: [], mejoresTrabajosHTML: [{ titulo: "Página en Wikipedia", url: "https://en.wikipedia.org/wiki/Marquese_Scott", descripcion: "Perfil oficial en Wikipedia sobre Marquese Scott (Nonstop)." }, { titulo: "Video más viral", url: "https://www.youtube.com/watch?v=LXO-jKksQkM&t=14s", descripcion: "Su video más viral en YouTube — Pumped Up Kicks." }] }
+        ];
+
+        function renderizarIdolos() {
+            const grid = document.getElementById("gridIdolos");
+            grid.innerHTML = "";
+            const lista = [...idolos].sort((a, b) => a.rankFamosos - b.rankFamosos);
+            lista.forEach((idol, index) => {
+                const tarjeta = document.createElement("div");
+                tarjeta.className = "tarjeta-bailarin";
+                tarjeta.onclick = () => abrirVisorIdolo(idol.id);
+                tarjeta.innerHTML = `
+                    <div class="contenedor-foto">
+                        <div class="contenedor-etiquetas-rank">
+                            <span class="etiqueta-ranking" style="color:#f5c518;border-color:#f5c518;">⭐ Rank #${idol.rankFamosos}</span>
+                            <span class="etiqueta-ranking" style="color:#aaa;">${idol.seguidores} seguidores</span>
+                        </div>
+                        <img src="${fotoOFallback(idol.foto)}" alt="${idol.nombre}" class="foto-bailarin" onerror="this.onerror=null;this.src=SVG_PLACEHOLDER_GRANDE;">
+                    </div>
+                    <div class="info-tarjeta-bailarin">
+                        <h3>${idol.nombre}</h3>
+                        <p>${idol.estilo}</p>
+                        <span class="badge-ubicacion-tarjeta">📍 ${idol.ciudad || idol.pais}</span>
+                    </div>
+                `;
+                grid.appendChild(tarjeta);
+            });
+        }
+
+        function abrirVisorIdolo(id) {
+            idArtistaSeleccionadoActivo = id;
+            const b = idolos.find(i => i.id === id);
+            if (!b) return;
+            const svgFallback = SVG_PLACEHOLDER_MODAL;
+            const modalFoto = document.getElementById("modalFoto");
+            modalFoto.src = b.foto || svgFallback;
+            modalFoto.onerror = function() { this.onerror=null; this.src=svgFallback; };
+            document.getElementById("modalNombre").innerText = b.nombre;
+            document.getElementById("modalEstilo").innerText = b.estilo;
+            document.getElementById("modalEdad").innerText = b.edad ? b.edad + " años" : "—";
+            document.getElementById("modalGenero").innerText = b.genero;
+            document.getElementById("modalUbicacion").innerText = `${b.ciudad || "—"}, ${b.estado || b.pais}`;
+            document.getElementById("modalRanks").innerText = `⭐ Rank Famosos #${b.rankFamosos} · ${b.seguidores} seguidores`;
+            const contenedorRedes = document.getElementById("modalRedes");
+            contenedorRedes.innerHTML = "";
+            if (b.redes && b.redes.length > 0) {
+                b.redes.forEach(red => {
+                    if (red.url && red.url.trim() !== "") {
+                        const link = document.createElement("a");
+                        link.href = red.url; link.target = "_blank";
+                        const tipo = red.nombre.toLowerCase();
+                        link.className = `link-red-modal ${tipo}`;
+                        let icono = `<i class="fa-solid fa-link"></i>`;
+                        if (tipo.includes('youtube')) icono = `<i class="fa-brands fa-youtube"></i>`;
+                        if (tipo.includes('facebook')) icono = `<i class="fa-brands fa-facebook-f"></i>`;
+                        if (tipo.includes('instagram')) icono = `<i class="fa-brands fa-instagram"></i>`;
+                        if (tipo.includes('tiktok')) icono = `<i class="fa-brands fa-tiktok"></i>`;
+                        link.innerHTML = icono;
+                        contenedorRedes.appendChild(link);
+                    }
+                });
+            }
+            cambiarSubPestana('historia');
+            cargarMejoresVideos(b);
+            document.getElementById("visorModal").style.display = "flex";
+            if (window.innerWidth > 750) document.body.style.overflow = "hidden";
         }
     </script>
 </body>
